@@ -5,4 +5,6 @@ import businesslogic.event.Service;
 
 public interface KitchenTaskEventReceiver {
     void updateSummarySheetCreated(Event event, Service service, SummarySheet summarySheet);
+
+    void updateSummarySheetOpened(Event event, Service service, SummarySheet summarySheet);
 }

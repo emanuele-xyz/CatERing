@@ -7,6 +7,7 @@ import businesslogic.event.Service;
 import businesslogic.user.User;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class KitchenTaskManager {
 
@@ -30,6 +31,20 @@ public class KitchenTaskManager {
         notifySummarySheetCreated(event, service, currentSummarySheet);
     }
 
+    public void openSummarySheet(Event event, Service service) throws UseCaseLogicException, KitchenTaskException {
+        if (!event.consistsOf(service) || service.getSummarySheet() == null) {
+            throw new UseCaseLogicException();
+        }
+
+        User user = CatERing.getInstance().getUserManager().getCurrentUser();
+        if (!user.tookOn(event)) {
+            throw new KitchenTaskException();
+        }
+
+        currentSummarySheet = service.getSummarySheet();
+        notifySummarySheetOpened(event, service, currentSummarySheet);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -41,8 +56,15 @@ public class KitchenTaskManager {
     }
 
     private void notifySummarySheetCreated(Event event, Service service, SummarySheet summarySheet) {
-        for (KitchenTaskEventReceiver e : eventReceivers) {
-            e.updateSummarySheetCreated(event, service, summarySheet);
-        }
+        eventReceiversForEach(er -> er.updateSummarySheetCreated(event, service, summarySheet));
     }
+
+    private void notifySummarySheetOpened(Event event, Service service, SummarySheet summarySheet) {
+        eventReceiversForEach(er -> er.updateSummarySheetOpened(event, service, summarySheet));
+    }
+
+    private void eventReceiversForEach(Consumer<? super KitchenTaskEventReceiver> action) {
+        eventReceivers.forEach(action);
+    }
+
 }
