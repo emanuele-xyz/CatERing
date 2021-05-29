@@ -22,7 +22,7 @@ public class KitchenTaskManager {
             throw new UseCaseLogicException();
         }
 
-        if (!event.isAppointedTo(user)) {
+        if (!user.tookOn(event)) {
             throw new KitchenTaskException();
         }
 

@@ -1,34 +1,43 @@
 package businesslogic.user;
 
+import businesslogic.event.Event;
 import javafx.collections.FXCollections;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class User {
 
-    private static Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
+    private static final Map<Integer, User> loadedUsers = FXCollections.observableHashMap();
 
-    public static enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE};
+    public enum Role {SERVIZIO, CUOCO, CHEF, ORGANIZZATORE}
 
     private int id;
     private String username;
-    private Set<Role> roles;
+    private final Set<Role> roles;
+
+    // TODO: this should be refactored
+    private final Set<Event> appointedEvents;
 
     public User() {
         id = 0;
         username = "";
-        this.roles = new HashSet<>();
+        roles = new HashSet<>();
+        appointedEvents = new HashSet<>();
     }
 
     public boolean isChef() {
         return roles.contains(Role.CHEF);
+    }
+
+    // TODO: this should be refactored
+    public boolean tookOn(Event event) {
+        return appointedEvents.contains(event);
     }
 
     public String getUserName() {
