@@ -1,6 +1,7 @@
 package businesslogic.menu;
 
 import businesslogic.CatERing;
+import businesslogic.recipe.KitchenProcedure;
 import businesslogic.recipe.Recipe;
 import businesslogic.user.User;
 import javafx.collections.FXCollections;
@@ -14,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Menu {
@@ -524,5 +526,10 @@ public class Menu {
                 // no generated ids to handle
             }
         });
+    }
+
+    // TODO: to be implemented
+    public List<KitchenProcedure> getRequiredKitchenProcedures() {
+        return null;
     }
 }
