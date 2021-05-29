@@ -22,4 +22,25 @@ public class SummarySheet {
             activities.add(new Activity(kp));
         }
     }
+
+    public List<Activity> addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) {
+        List<Activity> res = new ArrayList<>();
+
+        {
+            Activity activity = new Activity(kitchenProcedure, toPrepare, prepared);
+            activities.add(activity);
+            res.add(activity);
+        }
+
+        {
+            List<KitchenProcedure> kitchenProcedures = kitchenProcedure.getRequiredKitchenProcedures();
+            kitchenProcedures.forEach(kp -> {
+                Activity activity = new Activity(kp);
+                activities.add(activity);
+                res.add(activity);
+            });
+        }
+
+        return res;
+    }
 }
