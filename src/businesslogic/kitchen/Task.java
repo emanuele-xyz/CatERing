@@ -9,4 +9,9 @@ public class Task {
     public Task(KitchenShift shift, User cook, int estimatedTime, String estimatedDoses) {
 
     }
+
+    // TODO: to be implemented
+    public boolean isInThePast() {
+        return false;
+    }
 }

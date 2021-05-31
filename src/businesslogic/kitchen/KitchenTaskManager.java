@@ -100,6 +100,24 @@ public class KitchenTaskManager {
         notifyTaskCreated(currentSummarySheet, activity, task);
     }
 
+    public void editTaskActivity(Task task, Activity newActivity) throws UseCaseLogicException, KitchenTaskException {
+
+        Activity oldActivity = currentSummarySheet.getActivityByTask(task);
+
+        if (currentSummarySheet == null || oldActivity == null) {
+            throw new UseCaseLogicException();
+        }
+
+        if (task.isInThePast()) {
+            throw new KitchenTaskException();
+        }
+
+        oldActivity.removeTask(task);
+        newActivity.addTask(task);
+
+        notifyTaskActivityModified(currentSummarySheet, oldActivity, newActivity, task);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -137,6 +155,12 @@ public class KitchenTaskManager {
     private void notifyTaskCreated(SummarySheet summarySheet, Activity activity, Task task) {
         eventReceiversForEach(er -> er.updateTaskCreated(summarySheet, activity, task));
     }
+
+    private void notifyTaskActivityModified(SummarySheet summarySheet, Activity oldActivity, Activity newActivity, Task task) {
+        eventReceiversForEach(er -> er.updateTaskActivityModified(summarySheet, oldActivity, newActivity, task));
+    }
+
+    // UTILITY
 
     private void eventReceiversForEach(Consumer<? super KitchenTaskEventReceiver> action) {
         eventReceivers.forEach(action);

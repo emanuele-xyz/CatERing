@@ -14,4 +14,5 @@ public interface KitchenTaskEventReceiver {
     void updateActivityModified(SummarySheet summarySheet, Activity activity);
     void updateActivitiesRearranged(SummarySheet summarySheet);
     void updateTaskCreated(SummarySheet summarySheet, Activity activity, Task task);
+    void updateTaskActivityModified(SummarySheet summarySheet, Activity oldActivity, Activity newActivity, Task task);
 }
