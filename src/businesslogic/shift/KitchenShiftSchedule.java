@@ -1,4 +1,4 @@
-package businesslogic.shifts;
+package businesslogic.shift;
 
 public class KitchenShiftSchedule {
 }

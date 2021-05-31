@@ -1,6 +1,6 @@
-package businesslogic.shifts;
+package businesslogic.shift;
 
-public class ShiftsManager {
+public class ShiftManager {
 
     // TODO: to be implemented
     public KitchenShiftSchedule getKitchenShiftsSchedule() {
