@@ -68,6 +68,15 @@ public class KitchenTaskManager {
         notifyActivityDeleted(currentSummarySheet, activity);
     }
 
+    public void editActivity(Activity activity, String dosesToPrepare, String alreadyPreparedDoses, String preparedDoses) throws UseCaseLogicException {
+        if (currentSummarySheet == null || !currentSummarySheet.hasActivity(activity)) {
+            throw new UseCaseLogicException();
+        }
+
+        activity.edit(dosesToPrepare, alreadyPreparedDoses, preparedDoses);
+        notifyActivityModified(currentSummarySheet, activity);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -92,6 +101,10 @@ public class KitchenTaskManager {
 
     private void notifyActivityDeleted(SummarySheet summarySheet, Activity activity) {
         eventReceiversForEach(er -> er.updateActivityDeleted(summarySheet, activity));
+    }
+
+    private void notifyActivityModified(SummarySheet summarySheet, Activity activity) {
+        eventReceiversForEach(er -> er.updateActivityModified(summarySheet, activity));
     }
 
     private void eventReceiversForEach(Consumer<? super KitchenTaskEventReceiver> action) {
