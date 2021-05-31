@@ -12,4 +12,9 @@ public class Activity {
     public Activity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) {
 
     }
+
+    // TODO: to be implemented
+    public boolean hasAlreadyBeenCarriedOut() {
+        return false;
+    }
 }

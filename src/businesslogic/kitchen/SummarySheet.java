@@ -43,4 +43,12 @@ public class SummarySheet {
 
         return res;
     }
+
+    public boolean hasActivity(Activity activity) {
+        return activities.contains(activity);
+    }
+
+    public void removeActivity(Activity activity) {
+        activities.remove(activity);
+    }
 }
