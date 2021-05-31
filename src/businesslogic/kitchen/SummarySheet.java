@@ -51,4 +51,9 @@ public class SummarySheet {
     public void removeActivity(Activity activity) {
         activities.remove(activity);
     }
+
+    public void moveActivity(Activity activity, int position) {
+        activities.remove(activity);
+        activities.add(position, activity);
+    }
 }

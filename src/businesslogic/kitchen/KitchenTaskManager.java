@@ -77,6 +77,15 @@ public class KitchenTaskManager {
         notifyActivityModified(currentSummarySheet, activity);
     }
 
+    public void moveActivity(Activity activity, int position) throws UseCaseLogicException {
+        if (currentSummarySheet == null) {
+            throw new UseCaseLogicException();
+        }
+
+        currentSummarySheet.moveActivity(activity, position);
+        notifyActivitiesRearranged(currentSummarySheet);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -105,6 +114,10 @@ public class KitchenTaskManager {
 
     private void notifyActivityModified(SummarySheet summarySheet, Activity activity) {
         eventReceiversForEach(er -> er.updateActivityModified(summarySheet, activity));
+    }
+
+    private void notifyActivitiesRearranged(SummarySheet summarySheet) {
+        eventReceiversForEach(er -> er.updateActivitiesRearranged(summarySheet));
     }
 
     private void eventReceiversForEach(Consumer<? super KitchenTaskEventReceiver> action) {
