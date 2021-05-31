@@ -1,6 +1,7 @@
 package businesslogic.user;
 
 import businesslogic.event.Event;
+import businesslogic.shift.KitchenShift;
 import javafx.collections.FXCollections;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
@@ -38,6 +39,12 @@ public class User {
     // TODO: this should be refactored
     public boolean tookOn(Event event) {
         return appointedEvents.contains(event);
+    }
+
+    // TODO: this should be refactored
+    // TODO: to be implemented
+    public boolean isAvailable(KitchenShift shift) {
+        return false;
     }
 
     public String getUserName() {

@@ -5,6 +5,7 @@ import businesslogic.UseCaseLogicException;
 import businesslogic.event.Event;
 import businesslogic.event.Service;
 import businesslogic.recipe.KitchenProcedure;
+import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
 
 import java.util.List;
@@ -86,6 +87,19 @@ public class KitchenTaskManager {
         notifyActivitiesRearranged(currentSummarySheet);
     }
 
+    public void createTask(Activity activity, KitchenShift shift, User cook, int estimatedTime, String estimatedDoses) throws UseCaseLogicException, KitchenTaskException {
+        if (currentSummarySheet == null || !currentSummarySheet.hasActivity(activity)) {
+            throw new UseCaseLogicException();
+        }
+
+        if (shift.isFull() || shift.isInThePast() || !cook.isAvailable(shift)) {
+            throw new KitchenTaskException();
+        }
+
+        Task task = activity.createTask(shift, cook, estimatedTime, estimatedDoses);
+        notifyTaskCreated(currentSummarySheet, activity, task);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -118,6 +132,10 @@ public class KitchenTaskManager {
 
     private void notifyActivitiesRearranged(SummarySheet summarySheet) {
         eventReceiversForEach(er -> er.updateActivitiesRearranged(summarySheet));
+    }
+
+    private void notifyTaskCreated(SummarySheet summarySheet, Activity activity, Task task) {
+        eventReceiversForEach(er -> er.updateTaskCreated(summarySheet, activity, task));
     }
 
     private void eventReceiversForEach(Consumer<? super KitchenTaskEventReceiver> action) {
