@@ -47,13 +47,11 @@ public class Activity {
         return task;
     }
 
-    // TODO: to be implemented
     public void removeTask(Task task) {
-
+        tasks.remove(task);
     }
 
-    // TODO: to be implemented
     public void addTask(Task task) {
-
+        tasks.add(task);
     }
 }
