@@ -14,4 +14,14 @@ public class Task {
     public boolean isInThePast() {
         return false;
     }
+
+    // TODO: to be implemented
+    public User getCook() {
+        return null;
+    }
+
+    // TODO: to be implemented
+    public void setShift(KitchenShift shift) {
+
+    }
 }
