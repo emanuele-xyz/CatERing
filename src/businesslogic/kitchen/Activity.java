@@ -45,7 +45,7 @@ public class Activity {
         }
     }
 
-    public Task createTask(KitchenShift shift, User cook, int estimatedTime, String estimatedDoses) {
+    public Task createTask(KitchenShift shift, User cook, Integer estimatedTime, String estimatedDoses) {
         Task task = new Task(shift, cook, estimatedTime, estimatedDoses);
         tasks.add(task);
         return task;

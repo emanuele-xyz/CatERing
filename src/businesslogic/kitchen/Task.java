@@ -5,13 +5,19 @@ import businesslogic.user.User;
 
 public class Task {
 
+    private final KitchenShift shift;
+    private final boolean completed;
     private User cook;
     private Integer estimatedTime;
     private String estimatedDoses;
 
     // TODO: to be implemented
-    public Task(KitchenShift shift, User cook, int estimatedTime, String estimatedDoses) {
-
+    public Task(KitchenShift shift, User cook, Integer estimatedTime, String estimatedDoses) {
+        this.shift = shift;
+        this.completed = false;
+        if (cook != null) this.cook = cook;
+        if (estimatedTime != null) this.estimatedTime = estimatedTime;
+        if (estimatedDoses != null) this.estimatedDoses = estimatedDoses;
     }
 
     // TODO: to be implemented
