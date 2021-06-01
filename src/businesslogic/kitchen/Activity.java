@@ -58,4 +58,8 @@ public class Activity {
     public void removeTask(Task task) {
         tasks.remove(task);
     }
+
+    public boolean hasTask(Task task) {
+        return tasks.contains(task);
+    }
 }

@@ -57,8 +57,7 @@ public class SummarySheet {
         activities.add(position, activity);
     }
 
-    // TODO: to be implemented
     public Activity getActivityByTask(Task task) {
-        return null;
+        return activities.stream().filter(activity -> activity.hasTask(task)).findAny().orElse(null);
     }
 }
