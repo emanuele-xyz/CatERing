@@ -205,60 +205,54 @@ public class KitchenTaskManager {
     }
 
     private void notifySummarySheetCreated(Event event, Service service, SummarySheet summarySheet) {
-        eventReceiversForEach(er -> er.updateSummarySheetCreated(event, service, summarySheet));
+        eventReceivers.forEach(er -> er.updateSummarySheetCreated(event, service, summarySheet));
     }
 
     private void notifySummarySheetOpened(Event event, Service service, SummarySheet summarySheet) {
-        eventReceiversForEach(er -> er.updateSummarySheetOpened(event, service, summarySheet));
+        eventReceivers.forEach(er -> er.updateSummarySheetOpened(event, service, summarySheet));
     }
 
     private void notifyActivityAdded(SummarySheet summarySheet, List<Activity> activities) {
-        eventReceiversForEach(er -> er.updateActivityAdded(summarySheet, activities));
+        eventReceivers.forEach(er -> er.updateActivityAdded(summarySheet, activities));
     }
 
     private void notifyActivityDeleted(SummarySheet summarySheet, Activity activity) {
-        eventReceiversForEach(er -> er.updateActivityDeleted(summarySheet, activity));
+        eventReceivers.forEach(er -> er.updateActivityDeleted(summarySheet, activity));
     }
 
     private void notifyActivityModified(SummarySheet summarySheet, Activity activity) {
-        eventReceiversForEach(er -> er.updateActivityModified(summarySheet, activity));
+        eventReceivers.forEach(er -> er.updateActivityModified(summarySheet, activity));
     }
 
     private void notifyActivitiesRearranged(SummarySheet summarySheet) {
-        eventReceiversForEach(er -> er.updateActivitiesRearranged(summarySheet));
+        eventReceivers.forEach(er -> er.updateActivitiesRearranged(summarySheet));
     }
 
     private void notifyTaskCreated(SummarySheet summarySheet, Activity activity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskCreated(summarySheet, activity, task));
+        eventReceivers.forEach(er -> er.updateTaskCreated(summarySheet, activity, task));
     }
 
     private void notifyTaskActivityModified(SummarySheet summarySheet, Activity oldActivity, Activity newActivity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskActivityModified(summarySheet, oldActivity, newActivity, task));
+        eventReceivers.forEach(er -> er.updateTaskActivityModified(summarySheet, oldActivity, newActivity, task));
     }
 
     private void notifyTaskShiftModified(SummarySheet summarySheet, Activity activity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskShiftModified(summarySheet, activity, task));
+        eventReceivers.forEach(er -> er.updateTaskShiftModified(summarySheet, activity, task));
     }
 
     private void notifyTaskCookModified(SummarySheet summarySheet, Activity activity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskCookModified(summarySheet, activity, task));
+        eventReceivers.forEach(er -> er.updateTaskCookModified(summarySheet, activity, task));
     }
 
     private void notifyTaskCookRemoved(SummarySheet summarySheet, Activity activity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskCookRemoved(summarySheet, activity, task));
+        eventReceivers.forEach(er -> er.updateTaskCookRemoved(summarySheet, activity, task));
     }
 
     private void notifyTaskEstimatesModified(SummarySheet summarySheet, Activity activity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskEstimatesModified(summarySheet, activity, task));
+        eventReceivers.forEach(er -> er.updateTaskEstimatesModified(summarySheet, activity, task));
     }
 
     private void notifyTaskDeleted(SummarySheet summarySheet, Activity activity, Task task) {
-        eventReceiversForEach(er -> er.updateTaskDeleted(summarySheet, activity, task));
-    }
-
-    // UTILITY
-
-    private void eventReceiversForEach(Consumer<? super KitchenTaskEventReceiver> action) {
-        eventReceivers.forEach(action);
+        eventReceivers.forEach(er -> er.updateTaskDeleted(summarySheet, activity, task));
     }
 }
