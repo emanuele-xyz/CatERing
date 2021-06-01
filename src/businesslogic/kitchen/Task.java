@@ -5,6 +5,8 @@ import businesslogic.user.User;
 
 public class Task {
 
+    private User cook;
+
     // TODO: to be implemented
     public Task(KitchenShift shift, User cook, int estimatedTime, String estimatedDoses) {
 
@@ -23,5 +25,14 @@ public class Task {
     // TODO: to be implemented
     public void setShift(KitchenShift shift) {
 
+    }
+
+    // TODO: to be implemented
+    public KitchenShift getShift() {
+        return null;
+    }
+
+    public void setCook(User cook) {
+        this.cook = cook;
     }
 }

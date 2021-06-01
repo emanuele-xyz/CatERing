@@ -134,6 +134,21 @@ public class KitchenTaskManager {
         notifyTaskShiftModified(currentSummarySheet, activity, task);
     }
 
+    public void editTaskCook(Task task, User cook) throws UseCaseLogicException, KitchenTaskException {
+        Activity activity = currentSummarySheet.getActivityByTask(task);
+
+        if (currentSummarySheet == null || activity == null) {
+            throw new UseCaseLogicException();
+        }
+
+        if (task.isInThePast() || !cook.isAvailable(task.getShift())) {
+            throw new KitchenTaskException();
+        }
+
+        task.setCook(cook);
+        notifyTaskCookModified(currentSummarySheet, activity, task);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -178,6 +193,10 @@ public class KitchenTaskManager {
 
     private void notifyTaskShiftModified(SummarySheet summarySheet, Activity activity, Task task) {
         eventReceiversForEach(er -> er.updateTaskShiftModified(summarySheet, activity, task));
+    }
+
+    private void notifyTaskCookModified(SummarySheet summarySheet, Activity activity, Task task) {
+        eventReceiversForEach(er -> er.updateTaskCookModified(summarySheet, activity, task));
     }
 
     // UTILITY
