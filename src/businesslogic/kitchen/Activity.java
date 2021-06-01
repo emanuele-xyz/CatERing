@@ -4,27 +4,31 @@ import businesslogic.recipe.KitchenProcedure;
 import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Activity {
 
+    private final KitchenProcedure kitchenProcedure;
+    private final List<Task> tasks;
     private String dosesToPrepare;
     private String alreadyPreparedDoses;
     private String preparedDoses;
-    private List<Task> tasks;
 
-    // TODO: to be implemented
     public Activity(KitchenProcedure kitchenProcedure) {
+        this(kitchenProcedure, null, null);
     }
 
-    // TODO: to be implemented
     public Activity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) {
-
+        this.kitchenProcedure = kitchenProcedure;
+        this.tasks = new ArrayList<>();
+        this.dosesToPrepare = toPrepare != null ? toPrepare : "";
+        this.alreadyPreparedDoses = prepared != null ? prepared : "";
+        this.preparedDoses = "";
     }
 
-    // TODO: to be implemented
     public boolean hasAlreadyBeenCarriedOut() {
-        return false;
+        return tasks.stream().anyMatch(Task::isInThePast);
     }
 
     public void edit(String dosesToPrepare, String alreadyPreparedDoses, String preparedDoses) {
@@ -47,11 +51,11 @@ public class Activity {
         return task;
     }
 
-    public void removeTask(Task task) {
-        tasks.remove(task);
-    }
-
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
     }
 }
