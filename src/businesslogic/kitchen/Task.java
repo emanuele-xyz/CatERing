@@ -35,4 +35,12 @@ public class Task {
     public void setCook(User cook) {
         this.cook = cook;
     }
+
+    public boolean hasCook() {
+        return cook != null;
+    }
+
+    public void removeCook() {
+        cook = null;
+    }
 }
