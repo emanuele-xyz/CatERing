@@ -164,6 +164,21 @@ public class KitchenTaskManager {
         notifyTaskCookRemoved(currentSummarySheet, activity, task);
     }
 
+    public void editTaskEstimates(Task task, Integer estimatedTime, String estimatedDoses) throws KitchenTaskException, UseCaseLogicException {
+        Activity activity = currentSummarySheet.getActivityByTask(task);
+
+        if (currentSummarySheet == null || activity == null) {
+            throw new UseCaseLogicException();
+        }
+
+        if (task.isInThePast()) {
+            throw new KitchenTaskException();
+        }
+
+        task.editEstimates(estimatedTime, estimatedDoses);
+        notifyTaskEstimatesModified(currentSummarySheet, activity, task);
+    }
+
     // EVENT SENDER
 
     public void addEventReceiver(KitchenTaskEventReceiver receiver) {
@@ -216,6 +231,10 @@ public class KitchenTaskManager {
 
     private void notifyTaskCookRemoved(SummarySheet summarySheet, Activity activity, Task task) {
         eventReceiversForEach(er -> er.updateTaskCookRemoved(summarySheet, activity, task));
+    }
+
+    private void notifyTaskEstimatesModified(SummarySheet summarySheet, Activity activity, Task task) {
+        eventReceiversForEach(er -> er.updateTaskEstimatesModified(summarySheet, activity, task));
     }
 
     // UTILITY

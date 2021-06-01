@@ -6,6 +6,8 @@ import businesslogic.user.User;
 public class Task {
 
     private User cook;
+    private Integer estimatedTime;
+    private String estimatedDoses;
 
     // TODO: to be implemented
     public Task(KitchenShift shift, User cook, int estimatedTime, String estimatedDoses) {
@@ -42,5 +44,15 @@ public class Task {
 
     public void removeCook() {
         cook = null;
+    }
+
+    public void editEstimates(Integer estimatedTime, String estimatedDoses) {
+        if (estimatedTime != null) {
+            this.estimatedTime = estimatedTime;
+        }
+
+        if (estimatedDoses != null) {
+            this.estimatedDoses = estimatedDoses;
+        }
     }
 }
