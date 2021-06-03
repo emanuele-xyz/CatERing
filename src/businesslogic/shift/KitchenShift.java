@@ -4,12 +4,11 @@ public class KitchenShift {
 
     private boolean isFull;
 
-    // TODO: to be implemented
     public boolean isFull() {
-        return false;
+        return isFull;
     }
 
-    // TODO: to be implemented
+    // TODO: this should be implemented in Shift Management use case
     public boolean isInThePast() {
         return false;
     }
