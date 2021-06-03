@@ -9,7 +9,6 @@ import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class KitchenTaskManager {
 
