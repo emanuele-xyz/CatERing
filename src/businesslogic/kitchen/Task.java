@@ -5,51 +5,47 @@ import businesslogic.user.User;
 
 public class Task {
 
-    private final KitchenShift shift;
-    private final boolean completed;
+    private KitchenShift shift;
     private User cook;
+    private final boolean completed;
     private Integer estimatedTime;
     private String estimatedDoses;
 
-    // TODO: to be implemented
     public Task(KitchenShift shift, User cook, Integer estimatedTime, String estimatedDoses) {
         this.shift = shift;
         this.completed = false;
         if (cook != null) this.cook = cook;
-        if (estimatedTime != null) this.estimatedTime = estimatedTime;
-        if (estimatedDoses != null) this.estimatedDoses = estimatedDoses;
+        this.estimatedTime = estimatedTime != null ? estimatedTime : 0;
+        this.estimatedDoses = estimatedDoses != null ? estimatedDoses : "";
     }
 
-    // TODO: to be implemented
+    // TODO: to be implemented in Shift Management use case
     public boolean isInThePast() {
         return false;
     }
 
-    // TODO: to be implemented
     public User getCook() {
-        return null;
+        return cook;
     }
 
-    // TODO: to be implemented
-    public void setShift(KitchenShift shift) {
-
-    }
-
-    // TODO: to be implemented
     public KitchenShift getShift() {
-        return null;
+        return shift;
+    }
+
+    public void setShift(KitchenShift shift) {
+        this.shift = shift;
     }
 
     public void setCook(User cook) {
         this.cook = cook;
     }
 
-    public boolean hasCook() {
-        return cook != null;
-    }
-
     public void removeCook() {
         cook = null;
+    }
+
+    public boolean hasCook() {
+        return cook != null;
     }
 
     public void editEstimates(Integer estimatedTime, String estimatedDoses) {
