@@ -1,16 +1,22 @@
 package businesslogic.shift;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShiftManager {
 
-    private List<ShiftEventReceiver> eventReceivers;
+    private final List<ShiftEventReceiver> eventReceivers;
+    private final KitchenShiftSchedule kitchenShiftSchedule;
+
+    public ShiftManager() {
+        eventReceivers = new ArrayList<>();
+        kitchenShiftSchedule = new KitchenShiftSchedule();
+    }
 
     // OPERATIONS
 
-    // TODO: to be implemented
     public KitchenShiftSchedule getKitchenShiftsSchedule() {
-        return null;
+        return kitchenShiftSchedule;
     }
 
     public void markKitchenShiftAsFull(KitchenShift kitchenShift) throws ShiftException {
