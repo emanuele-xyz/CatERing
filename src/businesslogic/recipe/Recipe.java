@@ -8,8 +8,9 @@ import persistence.ResultHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Stream;
 
-public class Recipe {
+public class Recipe implements KitchenProcedure {
     private static Map<Integer, Recipe> all = new HashMap<>();
 
     private int id;
@@ -34,6 +35,12 @@ public class Recipe {
 
     public String toString() {
         return name;
+    }
+
+    @Override
+    // TODO: this should be implemented in Recipe Management use case
+    public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
+        return Stream.of(this);
     }
 
     // STATIC METHODS FOR PERSISTENCE

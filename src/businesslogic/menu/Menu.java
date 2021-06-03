@@ -14,9 +14,9 @@ import persistence.ResultHandler;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Menu {
     private static Map<Integer, Menu> loadedMenus = FXCollections.observableHashMap();
@@ -528,8 +528,9 @@ public class Menu {
         });
     }
 
-    // TODO: to be implemented
     public List<KitchenProcedure> getRequiredKitchenProcedures() {
-        return null;
+        Stream<KitchenProcedure> fikps = freeItems.stream().flatMap(MenuItem::getRequiredKitchenProceduresStream);
+        Stream<KitchenProcedure> skps = sections.stream().flatMap(Section::getRequiredKitchenProceduresStream);
+        return Stream.concat(fikps, skps).distinct().collect(Collectors.toList());
     }
 }

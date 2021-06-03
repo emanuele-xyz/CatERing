@@ -1,5 +1,6 @@
 package businesslogic.menu;
 
+import businesslogic.recipe.KitchenProcedure;
 import businesslogic.recipe.Recipe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MenuItem {
     private int id;
@@ -64,7 +67,13 @@ public class MenuItem {
         this.itemRecipe = itemRecipe;
     }
 
+    public List<KitchenProcedure> getRequiredKitchenProcedures() {
+        return itemRecipe.getRequiredKitchenProcedures();
+    }
 
+    public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
+        return itemRecipe.getRequiredKitchenProceduresStream();
+    }
 
     // STATIC METHODS FOR PERSISTENCE
 

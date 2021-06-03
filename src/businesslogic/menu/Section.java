@@ -1,5 +1,6 @@
 package businesslogic.menu;
 
+import businesslogic.recipe.KitchenProcedure;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import persistence.BatchUpdateHandler;
@@ -10,6 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Section {
     private int id;
@@ -35,7 +38,6 @@ public class Section {
         this.sectionItems.add(mi);
     }
 
-
     public void updateItems(ObservableList<MenuItem> newItems) {
         ObservableList<MenuItem> updatedList = FXCollections.observableArrayList();
         for (int i = 0; i < newItems.size(); i++) {
@@ -59,7 +61,6 @@ public class Section {
         }
         return null;
     }
-
 
     public int getItemPosition(MenuItem mi) {
         return this.sectionItems.indexOf(mi);
@@ -97,7 +98,6 @@ public class Section {
         return sectionItems.size();
     }
 
-
     public void moveItem(MenuItem mi, int position) {
         sectionItems.remove(mi);
         sectionItems.add(position, mi);
@@ -107,8 +107,16 @@ public class Section {
         sectionItems.remove(mi);
     }
 
+    public List<KitchenProcedure> getRequiredKitchenProcedures() {
+        return getRequiredKitchenProceduresStream().collect(Collectors.toList());
+    }
+
+    public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
+        return sectionItems.stream().flatMap(MenuItem::getRequiredKitchenProceduresStream).distinct();
+    }
 
     // STATIC METHODS FOR PERSISTENCE
+
     public static void saveNewSection(int menuid, Section sec, int posInMenu) {
         String secInsert = "INSERT INTO catering.MenuSections (menu_id, name, position) VALUES (" +
                 menuid + ", " +
@@ -147,7 +155,6 @@ public class Section {
         }
     }
 
-
     public static ObservableList<Section> loadSectionsFor(int menu_id) {
         ObservableList<Section> result = FXCollections.observableArrayList();
         String query = "SELECT * FROM MenuSections WHERE menu_id = " + menu_id +
@@ -169,7 +176,6 @@ public class Section {
         return result;
     }
 
-
     public static void deleteSection(int menu_id, Section s) {
         // delete items
         String itemdel = "DELETE FROM MenuItems WHERE section_id = " + s.id +
@@ -180,13 +186,11 @@ public class Section {
         PersistenceManager.executeUpdate(secdel);
     }
 
-
     public static void saveSectionName(Section s) {
         String upd = "UPDATE MenuSections SET name = '" + PersistenceManager.escapeString(s.name) + "'" +
                 " WHERE id = " + s.id;
         PersistenceManager.executeUpdate(upd);
     }
-
 
     public static void saveItemOrder(Section s) {
         String upd = "UPDATE MenuItems SET position = ? WHERE id = ?";

@@ -1,11 +1,14 @@
 package businesslogic.recipe;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class KitchenProcedure {
+public interface KitchenProcedure {
 
-    // TODO: to be implemented
-    public List<KitchenProcedure> getRequiredKitchenProcedures() {
-        return null;
+    Stream<KitchenProcedure> getRequiredKitchenProceduresStream();
+
+    default List<KitchenProcedure> getRequiredKitchenProcedures() {
+        return getRequiredKitchenProceduresStream().collect(Collectors.toList());
     }
 }
