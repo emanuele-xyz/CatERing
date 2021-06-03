@@ -19,7 +19,7 @@ public class Task {
         this.estimatedDoses = estimatedDoses != null ? estimatedDoses : "";
     }
 
-    // TODO: to be implemented in Shift Management use case
+    // TODO: this should be implemented in Shift Management use case
     public boolean isInThePast() {
         return false;
     }
