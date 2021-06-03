@@ -42,9 +42,8 @@ public class User {
     }
 
     // TODO: this should be refactored
-    // TODO: to be implemented
     public boolean isAvailable(KitchenShift shift) {
-        return false;
+        return true;
     }
 
     public String getUserName() {
