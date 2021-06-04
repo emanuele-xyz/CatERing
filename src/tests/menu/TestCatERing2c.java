@@ -1,3 +1,5 @@
+package tests.menu;
+
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
 import businesslogic.menu.Menu;
@@ -5,7 +7,7 @@ import businesslogic.menu.Section;
 import businesslogic.recipe.Recipe;
 import javafx.collections.ObservableList;
 
-public class TestCatERing2d {
+public class TestCatERing2c {
     public static void main(String[] args) {
         try {
             /* System.out.println("TEST DATABASE CONNECTION");
@@ -16,6 +18,7 @@ public class TestCatERing2d {
             Section antipasti = CatERing.getInstance().getMenuManager().defineSection("Antipasti");
             Section primi = CatERing.getInstance().getMenuManager().defineSection("Primi");
             Section secondi = CatERing.getInstance().getMenuManager().defineSection("Secondi");
+
             ObservableList<Recipe> recipes = CatERing.getInstance().getRecipeManager().getRecipes();
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(0), antipasti);
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(1), antipasti);
@@ -25,11 +28,8 @@ public class TestCatERing2d {
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(3));
             CatERing.getInstance().getMenuManager().insertItem(recipes.get(4));
 
-            System.out.println(m.testString());
-
-            System.out.println("\nTEST MOVE SECTION");
-            CatERing.getInstance().getMenuManager().moveSection(antipasti, 1);
-            CatERing.getInstance().getMenuManager().moveSection(secondi, 0);
+            System.out.println("\nTEST CHANGE SECTION NAME");
+            CatERing.getInstance().getMenuManager().changeSectionName(antipasti, "Hors d'Oeuvres");
             System.out.println(m.testString());
 
         } catch (UseCaseLogicException ex) {

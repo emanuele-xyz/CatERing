@@ -1,3 +1,5 @@
+package tests;
+
 import persistence.PersistenceManager;
 
 public class TestDB {
