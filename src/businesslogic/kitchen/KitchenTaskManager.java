@@ -24,7 +24,7 @@ public class KitchenTaskManager {
             throw new UseCaseLogicException();
         }
 
-        if (!user.tookOn(event)) {
+        if (!event.isAppointedTo(user)) {
             throw new KitchenTaskException();
         }
 
@@ -38,7 +38,7 @@ public class KitchenTaskManager {
         }
 
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
-        if (!user.tookOn(event)) {
+        if (!event.isAppointedTo(user)) {
             throw new KitchenTaskException();
         }
 

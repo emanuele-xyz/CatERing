@@ -1,7 +1,5 @@
 package businesslogic.user;
 
-import businesslogic.event.Event;
-import businesslogic.shift.KitchenShift;
 import javafx.collections.FXCollections;
 import persistence.PersistenceManager;
 import persistence.ResultHandler;
@@ -22,28 +20,14 @@ public class User {
     private String username;
     private final Set<Role> roles;
 
-    // TODO: this should be refactored
-    private final Set<Event> appointedEvents;
-
     public User() {
         id = 0;
         username = "";
         roles = new HashSet<>();
-        appointedEvents = new HashSet<>();
     }
 
     public boolean isChef() {
         return roles.contains(Role.CHEF);
-    }
-
-    // TODO: this should be refactored
-    public boolean tookOn(Event event) {
-        return appointedEvents.contains(event);
-    }
-
-    // TODO: this should be refactored
-    public boolean isAvailable(KitchenShift shift) {
-        return true;
     }
 
     public String getUserName() {
