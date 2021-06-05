@@ -91,7 +91,7 @@ public class KitchenTaskManager {
             throw new UseCaseLogicException();
         }
 
-        if (shift.isFull() || shift.isInThePast() || !cook.isAvailable(shift)) {
+        if (shift.isFull() || shift.isInThePast() || !shift.hasCookAvailable(cook)) {
             throw new KitchenTaskException();
         }
 
@@ -125,7 +125,7 @@ public class KitchenTaskManager {
             throw new UseCaseLogicException();
         }
 
-        if (task.isInThePast() || shift.isFull() || shift.isInThePast() || (task.getCook() != null && !task.getCook().isAvailable(shift))) {
+        if (task.isInThePast() || shift.isFull() || shift.isInThePast() || (task.getCook() != null && !shift.hasCookAvailable(task.getCook()))) {
             throw new KitchenTaskException();
         }
 
@@ -140,7 +140,7 @@ public class KitchenTaskManager {
             throw new UseCaseLogicException();
         }
 
-        if (task.isInThePast() || !cook.isAvailable(task.getShift())) {
+        if (task.isInThePast() || !task.getShift().hasCookAvailable(cook)) {
             throw new KitchenTaskException();
         }
 

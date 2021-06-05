@@ -1,5 +1,7 @@
 package businesslogic.shift;
 
+import businesslogic.user.User;
+
 public class KitchenShift {
 
     private boolean isFull;
@@ -15,5 +17,10 @@ public class KitchenShift {
 
     public void markAsFull() {
         this.isFull = true;
+    }
+
+    // TODO: this should be implemented in Shift Management use case
+    public boolean hasCookAvailable(User cook) {
+        return true;
     }
 }
