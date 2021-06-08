@@ -6,4 +6,9 @@ public class EventManager {
     public ObservableList<EventInfo> getEventInfo() {
         return EventInfo.loadAllEventInfo();
     }
+
+    // TODO: to be implemented
+    public Event getEvent(int id) {
+        return null;
+    }
 }

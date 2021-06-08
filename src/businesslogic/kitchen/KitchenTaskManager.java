@@ -8,16 +8,21 @@ import businesslogic.recipe.KitchenProcedure;
 import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenTaskManager {
 
     private SummarySheet currentSummarySheet;
-    private List<KitchenTaskEventReceiver> eventReceivers;
+    private final List<KitchenTaskEventReceiver> eventReceivers;
+
+    public KitchenTaskManager() {
+        eventReceivers = new ArrayList<>();
+    }
 
     // OPERATIONS
 
-    public void generateSummarySheet(Event event, Service service) throws UseCaseLogicException, KitchenTaskException {
+    public SummarySheet generateSummarySheet(Event event, Service service) throws UseCaseLogicException, KitchenTaskException {
         User user = CatERing.getInstance().getUserManager().getCurrentUser();
 
         if (!user.isChef() || !event.consistsOf(service) || !service.hasMenu() || service.getSummarySheet() != null) {
@@ -30,6 +35,8 @@ public class KitchenTaskManager {
 
         currentSummarySheet = service.generateSummarySheet();
         notifySummarySheetCreated(event, service, currentSummarySheet);
+
+        return currentSummarySheet;
     }
 
     public void openSummarySheet(Event event, Service service) throws UseCaseLogicException, KitchenTaskException {
@@ -46,13 +53,15 @@ public class KitchenTaskManager {
         notifySummarySheetOpened(event, service, currentSummarySheet);
     }
 
-    public void addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) throws UseCaseLogicException {
+    public Activity addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) throws UseCaseLogicException {
         if (currentSummarySheet == null) {
             throw new UseCaseLogicException();
         }
 
         List<Activity> addedActivities = currentSummarySheet.addActivity(kitchenProcedure, toPrepare, prepared);
         notifyActivityAdded(currentSummarySheet, addedActivities);
+
+        return addedActivities.get(0);
     }
 
     private void removeActivity(Activity activity) throws UseCaseLogicException, KitchenTaskException {

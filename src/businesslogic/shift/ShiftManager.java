@@ -15,7 +15,7 @@ public class ShiftManager {
 
     // OPERATIONS
 
-    public KitchenShiftSchedule getKitchenShiftsSchedule() {
+    public KitchenShiftSchedule getKitchenShiftSchedule() {
         return kitchenShiftSchedule;
     }
 

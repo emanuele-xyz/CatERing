@@ -21,4 +21,9 @@ public class Event {
     public boolean isAppointedTo(User user) {
         return false;
     }
+
+    // TODO: to be implemented
+    public Service getService(int id) {
+        return null;
+    }
 }

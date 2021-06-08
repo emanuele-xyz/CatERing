@@ -1,12 +1,13 @@
 package businesslogic;
 
 import businesslogic.event.EventManager;
-import businesslogic.menu.Menu;
+import businesslogic.kitchen.KitchenTaskManager;
+import businesslogic.kitchen.KitchenTaskPersistence;
 import businesslogic.menu.MenuManager;
 import businesslogic.recipe.RecipeManager;
+import businesslogic.shift.ShiftManager;
 import businesslogic.user.UserManager;
 import persistence.MenuPersistence;
-import persistence.PersistenceManager;
 
 public class CatERing {
     private static CatERing singleInstance;
@@ -18,25 +19,38 @@ public class CatERing {
         return singleInstance;
     }
 
-    private MenuManager menuMgr;
-    private RecipeManager recipeMgr;
-    private UserManager userMgr;
-    private EventManager eventMgr;
+    private final MenuManager menuMgr;
+    private final MenuPersistence menuPersistence;
 
-    private MenuPersistence menuPersistence;
+    private final KitchenTaskManager kitchenTaskMgr;
+    private final KitchenTaskPersistence kitchenTaskPersistence;
+
+    private final RecipeManager recipeMgr;
+    private final UserManager userMgr;
+    private final EventManager eventMgr;
+    private final ShiftManager shiftMgr;
 
     private CatERing() {
         menuMgr = new MenuManager();
+        menuPersistence = new MenuPersistence();
+        menuMgr.addEventReceiver(menuPersistence);
+
+        kitchenTaskMgr = new KitchenTaskManager();
+        kitchenTaskPersistence = new KitchenTaskPersistence();
+        kitchenTaskMgr.addEventReceiver(kitchenTaskPersistence);
+
         recipeMgr = new RecipeManager();
         userMgr = new UserManager();
         eventMgr = new EventManager();
-        menuPersistence = new MenuPersistence();
-        menuMgr.addEventReceiver(menuPersistence);
+        shiftMgr = new ShiftManager();
     }
-
 
     public MenuManager getMenuManager() {
         return menuMgr;
+    }
+
+    public KitchenTaskManager getKitchenTaskManager() {
+        return kitchenTaskMgr;
     }
 
     public RecipeManager getRecipeManager() {
@@ -47,6 +61,11 @@ public class CatERing {
         return userMgr;
     }
 
-    public EventManager getEventManager() { return eventMgr; }
+    public EventManager getEventManager() {
+        return eventMgr;
+    }
 
+    public ShiftManager getShiftManager() {
+        return shiftMgr;
+    }
 }

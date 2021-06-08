@@ -5,7 +5,7 @@ import businesslogic.event.Service;
 
 import java.util.List;
 
-public class KitchenPersistence implements KitchenTaskEventReceiver {
+public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
 
     @Override
     public void updateSummarySheetCreated(Event event, Service service, SummarySheet summarySheet) {

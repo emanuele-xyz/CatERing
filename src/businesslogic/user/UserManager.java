@@ -1,6 +1,9 @@
 package businesslogic.user;
 
+import java.util.List;
+
 public class UserManager {
+
     private User currentUser;
 
     // TODO: bisogna implementare il login vero!
@@ -10,5 +13,10 @@ public class UserManager {
 
     public User getCurrentUser() {
         return this.currentUser;
+    }
+
+    // TODO: to be implemented
+    public List<User> getCooks() {
+        return null;
     }
 }
