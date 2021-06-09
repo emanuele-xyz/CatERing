@@ -42,11 +42,12 @@ public class TestKitchenManagement {
             List<KitchenShift> kitchenShifts = kss.getKitchenShifts();
 
             System.out.println("\nTEST CREATE TASK");
-            User cook = CatERing.getInstance().getUserManager().getCooks().get(0);
+            User cook = User.loadUserById(4);
             CatERing.getInstance().getKitchenTaskManager().createTask(a1, kitchenShifts.get(0), cook, 60, "3 porzioni");
 
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");
+            e.printStackTrace();
         }
     }
 }

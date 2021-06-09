@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 
 public class Menu {
     private static Map<Integer, Menu> loadedMenus = FXCollections.observableHashMap();
+
     private int id;
     private String title;
     private boolean published;
@@ -120,7 +121,6 @@ public class Menu {
                 "pubblicato," + (inUse ? " " : " non ") + "in uso";
     }
 
-
     public int getId() {
         return id;
     }
@@ -140,7 +140,6 @@ public class Menu {
         freeItems.add(new MenuItem(all[4]));
         freeItems.add(new MenuItem(all[5]));
     }
-
 
     public Section addSection(String name) {
         Section sec = new Section(name);
@@ -187,11 +186,9 @@ public class Menu {
         this.title = title;
     }
 
-
     public void setPublished(boolean b) {
         published = b;
     }
-
 
     public boolean isInUse() {
         return this.inUse;
@@ -301,6 +298,12 @@ public class Menu {
         else sec.removeItem(mi);
     }
 
+    public List<KitchenProcedure> getRequiredKitchenProcedures() {
+        Stream<KitchenProcedure> fikps = freeItems.stream().flatMap(MenuItem::getRequiredKitchenProceduresStream);
+        Stream<KitchenProcedure> skps = sections.stream().flatMap(Section::getRequiredKitchenProceduresStream);
+        return Stream.concat(fikps, skps).distinct().collect(Collectors.toList());
+    }
+
     // STATIC METHODS FOR PERSISTENCE
 
     public static void saveNewMenu(Menu m) {
@@ -353,7 +356,6 @@ public class Menu {
         featuresToDB(m);
     }
 
-
     public static void saveMenuPublished(Menu m) {
         String upd = "UPDATE Menus SET published = " + m.published +
                 " WHERE id = " + m.getId();
@@ -379,7 +381,6 @@ public class Menu {
         });
     }
 
-
     public static void deleteMenu(Menu m) {
         // delete sections
         String delSec = "DELETE FROM MenuSections WHERE menu_id = " + m.id;
@@ -397,6 +398,44 @@ public class Menu {
         String del = "DELETE FROM Menus WHERE id = " + m.getId();
         PersistenceManager.executeUpdate(del);
         loadedMenus.remove(m);
+    }
+
+    // TODO: to be implemented
+    public static Menu loadMenuByID(int menuID) {
+        if (loadedMenus.containsKey(menuID)) {
+            return loadedMenus.get(menuID);
+        }
+
+        String query = String.format("SELECT * FROM menus WHERE id = %d", menuID);
+        PersistenceManager.executeQuery(query, rs -> {
+            final int id = rs.getInt("id");
+            if (id <= 0) return;
+
+            Menu m = new Menu();
+            m.id = id;
+            m.title = rs.getString("title");
+            m.published = rs.getBoolean("published");
+
+            // find if "in use"
+            {
+                String inuseQuery = "SELECT * FROM Services WHERE approved_menu_id = " + m.id;
+                PersistenceManager.executeQuery(inuseQuery, rs1 -> m.inUse = true);
+            }
+
+            // load features
+            {
+                String featuresQuery = "SELECT * FROM MenuFeatures WHERE menu_id = " + m.id;
+                PersistenceManager.executeQuery(featuresQuery, rs12 -> m.featuresMap.put(rs12.getString("name"), rs12.getBoolean("value")));
+            }
+
+            m.sections = Section.loadSectionsFor(m.id);
+            m.freeItems = MenuItem.loadItemsFor(m.id, 0);
+            m.owner = User.loadUserById(rs.getInt("owner_id"));
+
+            loadedMenus.put(m.id, m);
+        });
+
+        return loadedMenus.get(menuID);
     }
 
     public static ObservableList<Menu> loadAllMenus() {
@@ -511,7 +550,6 @@ public class Menu {
         });
     }
 
-
     public static void saveFreeItemOrder(Menu m) {
         String upd = "UPDATE MenuItems SET position = ? WHERE id = ?";
         PersistenceManager.executeBatchUpdate(upd, m.freeItems.size(), new BatchUpdateHandler() {
@@ -526,11 +564,5 @@ public class Menu {
                 // no generated ids to handle
             }
         });
-    }
-
-    public List<KitchenProcedure> getRequiredKitchenProcedures() {
-        Stream<KitchenProcedure> fikps = freeItems.stream().flatMap(MenuItem::getRequiredKitchenProceduresStream);
-        Stream<KitchenProcedure> skps = sections.stream().flatMap(Section::getRequiredKitchenProceduresStream);
-        return Stream.concat(fikps, skps).distinct().collect(Collectors.toList());
     }
 }

@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Event {
 
@@ -15,7 +16,7 @@ public class Event {
     private Date dateStart;
     private Date dateEnd;
     private int expectedParticipants;
-    private int organizer;
+    private User organizer;
     private final List<Service> services;
 
     public Event() {
@@ -26,42 +27,40 @@ public class Event {
         return services.contains(service);
     }
 
-    // TODO: to be implemented
     public boolean isAppointedTo(User user) {
-        return false;
+        return this.organizer == user;
     }
 
     // TODO: to be implemented
     public Service getService(int id) {
-        return null;
+        return services.stream().filter(service -> service.getId() == id).findAny().orElse(null);
     }
 
     // STATIC METHODS FOR PERSISTENCE
 
-    private static final HashMap<Integer, Event> cache = new HashMap<>();
+    private static final Map<Integer, Event> cache = new HashMap<>();
 
-    public static Event loadEventByID(int id) {
-        if (cache.containsKey(id)) {
-            return cache.get(id);
-        }
+    // TODO: to be implemented
+    public static Event loadEventByID(int eventID) {
+        if (cache.containsKey(eventID)) return cache.get(eventID);
 
-        Event e = new Event();
-        String query = String.format("SELECT * FROM events WHERE id=%d", id);
+        String query = String.format("SELECT * FROM events WHERE id = %d", eventID);
         PersistenceManager.executeQuery(query, rs -> {
-            e.id = rs.getInt("id");
-            e.name = rs.getString("name");
-            e.dateStart = rs.getDate("date_start");
-            e.dateEnd = rs.getDate("date_end");
-            e.expectedParticipants = rs.getInt("expected_participants");
-            e.organizer = rs.getInt("organizer_id");
+            int id = rs.getInt("id");
+            if (id <= 0) return;
+
+            Event event = new Event();
+            event.id = id;
+            event.name = rs.getString("name");
+            event.dateStart = rs.getDate("date_start");
+            event.dateEnd = rs.getDate("date_end");
+            event.expectedParticipants = rs.getInt("expected_participants");
+            event.organizer = User.loadUserById(rs.getInt("organizer_id"));
+            event.services.addAll(Service.loadServicesByEventID(event.id));
+
+            cache.put(event.id, event);
         });
 
-        // TODO: to complete
-        query = String.format("SELECT * FROM services WHERE event_id=%d", e.id);
-        PersistenceManager.executeQuery(query, rs -> {
-            e.services.add();
-        });
-
-        return e;
+        return cache.get(eventID);
     }
 }

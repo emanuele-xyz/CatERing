@@ -2,14 +2,23 @@ package businesslogic.kitchen;
 
 import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
+import persistence.PersistenceManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Task {
 
+    private int id;
     private KitchenShift shift;
     private User cook;
-    private final boolean completed;
+    private boolean completed;
     private Integer estimatedTime;
     private String estimatedDoses;
+
+    private Task() {}
 
     public Task(KitchenShift shift, User cook, Integer estimatedTime, String estimatedDoses) {
         this.shift = shift;
@@ -55,5 +64,37 @@ public class Task {
         if (estimatedDoses != null) {
             this.estimatedDoses = estimatedDoses;
         }
+    }
+
+    // STATIC METHODS FOR PERSISTENCE
+
+    private static final Map<Integer, Task> cache = new HashMap<>();
+
+    // TODO: to be implemented
+    public static List<Task> loadTasksByActivityID(int activityID) {
+        List<Task> tasks = new ArrayList<>();
+
+        String query = String.format("SELECT * FROM tasks WHERE activity_id = %d", activityID);
+        PersistenceManager.executeQuery(query, rs -> {
+            final int taskID = rs.getInt("id");
+            if (taskID <= 0) return;
+
+            if (cache.containsKey(taskID)) {
+                tasks.add(cache.get(taskID));
+            } else {
+                Task task = new Task();
+                task.id = taskID;
+                task.shift = KitchenShift.loadKitchenShiftByID(rs.getInt("kitchen_shift_id"));
+                task.cook = User.loadUserById(rs.getInt("cook_id"));
+                task.completed = rs.getBoolean("completed");
+                task.estimatedTime = rs.getInt("estimated_time");
+                task.estimatedDoses = rs.getString("estimated_doses");
+
+                tasks.add(task);
+                cache.put(task.id, task);
+            }
+        });
+
+        return tasks;
     }
 }

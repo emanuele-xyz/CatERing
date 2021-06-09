@@ -1,10 +1,19 @@
 package businesslogic.shift;
 
 import businesslogic.user.User;
+import persistence.PersistenceManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class KitchenShift {
 
+    private int id;
     private boolean isFull;
+
+    private KitchenShift() {}
 
     public boolean isFull() {
         return isFull;
@@ -22,5 +31,50 @@ public class KitchenShift {
     // TODO: this should be implemented in Shift Management use case
     public boolean hasCookAvailable(User cook) {
         return true;
+    }
+
+    // STATIC METHODS FOR PERSISTENCE
+
+    private static final Map<Integer, KitchenShift> cache = new HashMap<>();
+
+    // TODO: to be implemented
+    public static KitchenShift loadKitchenShiftByID(int kitchenShiftID) {
+        if (cache.containsKey(kitchenShiftID)) return cache.get(kitchenShiftID);
+
+        String query = String.format("SELECT * FROM kitchen_shift WHERE id = %d", kitchenShiftID);
+        PersistenceManager.executeQuery(query, rs -> {
+            final int id = rs.getInt("id");
+            if (id <= 0) return;
+
+            KitchenShift kitchenShift = new KitchenShift();
+            kitchenShift.id = id;
+            kitchenShift.isFull = rs.getBoolean("is_full");
+
+            cache.put(kitchenShift.id, kitchenShift);
+        });
+
+        return cache.get(kitchenShiftID);
+    }
+
+    // TODO: to be implemented
+    public static List<KitchenShift> loadAllKitchenShift() {
+        List<KitchenShift> kitchenShifts = new ArrayList<>();
+
+        String query = "SELECT * FROM kitchen_shifts";
+        PersistenceManager.executeQuery(query, rs -> {
+            final int id = rs.getInt("id");
+            if (cache.containsKey(id)) {
+                kitchenShifts.add(cache.get(id));
+            } else {
+                KitchenShift kitchenShift = new KitchenShift();
+                kitchenShift.id = id;
+                kitchenShift.isFull = rs.getBoolean("is_full");
+
+                cache.put(kitchenShift.id, kitchenShift);
+                kitchenShifts.add(kitchenShift);
+            }
+        });
+
+        return kitchenShifts;
     }
 }

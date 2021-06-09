@@ -1,6 +1,5 @@
 package businesslogic.shift;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class KitchenShiftSchedule {
@@ -8,7 +7,7 @@ public class KitchenShiftSchedule {
     private final List<KitchenShift> kitchenShifts;
 
     public KitchenShiftSchedule() {
-        kitchenShifts = new ArrayList<>();
+        kitchenShifts = KitchenShift.loadAllKitchenShift();
     }
 
     public List<KitchenShift> getKitchenShifts() {
