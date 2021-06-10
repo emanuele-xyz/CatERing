@@ -66,6 +66,24 @@ public class Task {
         }
     }
 
+    public String testString() {
+        return testString(0, 2);
+    }
+
+    public String testString(int indentation, int spacesPerIndent) {
+        final String outerIndent = " ".repeat(indentation * spacesPerIndent);
+        final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
+
+        return outerIndent + "Compito {\n" +
+                indent + "id: " + id + '\n' +
+                indent + "cuoco: " + cook + '\n' +
+                indent + "completato: " + completed + '\n' +
+                indent + "tempo stimato: " + estimatedTime + '\n' +
+                indent + "dosi stimate: " + estimatedDoses + '\n' +
+                indent + shift.testString(indentation, spacesPerIndent) + '\n' +
+                outerIndent + "}";
+    }
+
     // STATIC METHODS FOR PERSISTENCE
 
     private static final Map<Integer, Task> cache = new HashMap<>();

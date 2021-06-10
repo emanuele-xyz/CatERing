@@ -31,6 +31,10 @@ public class Activity {
         this.preparedDoses = "";
     }
 
+    public int getID() {
+        return id;
+    }
+
     public boolean hasAlreadyBeenCarriedOut() {
         return tasks.stream().anyMatch(Task::isInThePast);
     }
@@ -65,6 +69,29 @@ public class Activity {
 
     public boolean hasTask(Task task) {
         return tasks.contains(task);
+    }
+
+    public String testString() {
+        return testString(0, 2);
+    }
+
+    public String testString(int indentation, int spacesPerIndent) {
+        final String outerIndent = " ".repeat(indentation * spacesPerIndent);
+        final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(outerIndent).append("Attivita {\n");
+        sb.append(indent).append("id: ").append(id).append('\n');
+        sb.append(indent).append("procedura di cucina: ").append(kitchenProcedure).append('\n');
+        sb.append(indent).append("dosi da preparare: '").append(dosesToPrepare).append('\'').append('\n');
+        sb.append(indent).append("dosi gia' preparate: '").append(alreadyPreparedDoses).append('\'').append('\n');
+        sb.append(indent).append("dosi proparate: '").append(preparedDoses).append('\'').append('\n');
+        sb.append(indent).append("compiti:").append("{\n");
+        tasks.forEach(task -> sb.append(task.testString(indentation + 2, spacesPerIndent)).append(",\n"));
+        sb.append(indent).append("}\n");
+        sb.append(outerIndent).append("}");
+
+        return sb.toString();
     }
 
     // STATIC METHODS FOR PERSISTENCE

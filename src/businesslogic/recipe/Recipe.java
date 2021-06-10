@@ -16,9 +16,7 @@ public class Recipe implements KitchenProcedure {
     private int id;
     private String name;
 
-    private Recipe() {
-
-    }
+    private Recipe() {}
 
     public Recipe(String name) {
         id = 0;
@@ -89,6 +87,4 @@ public class Recipe implements KitchenProcedure {
         });
         return rec;
     }
-
-
 }

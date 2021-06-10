@@ -33,6 +33,20 @@ public class KitchenShift {
         return true;
     }
 
+    public String testString() {
+        return testString(0, 2);
+    }
+
+    public String testString(int indentation, int spacesPerIndent) {
+        final String outerIndent = " ".repeat(indentation * spacesPerIndent);
+        final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
+
+        return outerIndent + "Turno di cucina {\n" +
+                indent + "id: " + id + '\n' +
+                indent + "al completo: " + isFull + '\n' +
+                outerIndent + "}";
+    }
+
     // STATIC METHODS FOR PERSISTENCE
 
     private static final Map<Integer, KitchenShift> cache = new HashMap<>();

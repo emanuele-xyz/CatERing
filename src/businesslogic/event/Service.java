@@ -38,6 +38,25 @@ public class Service {
         return id;
     }
 
+    public String testString() {
+        return testString(0, 2);
+    }
+
+    public String testString(int indentation, int spacesPerIndent) {
+        final String outerIndent = " ".repeat(indentation * spacesPerIndent);
+        final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(outerIndent).append("Servizio {\n");
+        sb.append(indent).append("id: ").append(id).append('\n');
+        sb.append(indent).append("menu: ").append(menu == null ? "NONE" : menu.getId()).append('\n');
+        if (summarySheet == null) sb.append(indent).append("NESSUN FOGLIO RIEPILOGATIVO");
+        else sb.append(summarySheet.testString(indentation + 1, spacesPerIndent));
+        sb.append("\n").append(outerIndent).append("}");
+
+        return sb.toString();
+    }
+
     // STATIC METHODS FOR PERSISTENCE
 
     private static final Map<Integer, Service> cache = new HashMap<>();
