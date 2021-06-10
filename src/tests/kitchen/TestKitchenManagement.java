@@ -39,10 +39,12 @@ public class TestKitchenManagement {
             System.out.println("TEST ADD ACTIVITY");
             System.out.println("-".repeat(80));
 
+            // TODO: the activity gets added twice!
             ObservableList<Recipe> recipes = CatERing.getInstance().getRecipeManager().getRecipes();
             Activity a1 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(0), "12 porzioni", "nessuna porzione");
             Activity a2 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(1), "7 piatti", "nessun piatto");
             Activity a3 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(2), "1 Kg", "20 g");
+            System.out.println(sh.debugString());
 
             System.out.println("-".repeat(80));
             System.out.println("TEST MOVE ACTIVITY");
