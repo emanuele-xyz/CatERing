@@ -28,8 +28,6 @@ public class TestKitchenManagement {
             Service s = e.getService(2);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().generateSummarySheet(e, s);
             System.out.println(e.testString());
-            // System.out.println(s.testString());
-            // System.out.println(sh.testString());
 
             System.out.println("\nTEST ADD ACTIVITY");
             ObservableList<Recipe> recipes = CatERing.getInstance().getRecipeManager().getRecipes();
