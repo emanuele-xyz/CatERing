@@ -66,11 +66,11 @@ public class SummarySheet {
         return activities.stream().filter(activity -> activity.hasTask(task)).findAny().orElse(null);
     }
 
-    public String testString() {
-        return testString(0, 2);
+    public String debugString() {
+        return debugString(0, 2);
     }
 
-    public String testString(int indentation, int spacesPerIndent) {
+    public String debugString(int indentation, int spacesPerIndent) {
         final String outerIndent = " ".repeat(indentation * spacesPerIndent);
         final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
         final StringBuilder sb = new StringBuilder();
@@ -78,7 +78,7 @@ public class SummarySheet {
         sb.append(outerIndent).append("Foglio Riepilogativo {\n");
         sb.append(indent).append("id: ").append(id).append('\n');
         sb.append(indent).append("attivita: ").append("{\n");
-        activities.forEach(activity -> sb.append(activity.testString(indentation + 2, spacesPerIndent)).append(",\n"));
+        activities.forEach(activity -> sb.append(activity.debugString(indentation + 2, spacesPerIndent)).append(",\n"));
         sb.append(indent).append("}\n");
         sb.append(outerIndent).append("}");
 

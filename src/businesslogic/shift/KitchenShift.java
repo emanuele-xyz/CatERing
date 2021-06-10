@@ -33,11 +33,11 @@ public class KitchenShift {
         return true;
     }
 
-    public String testString() {
-        return testString(0, 2);
+    public String debugString() {
+        return debugString(0, 2);
     }
 
-    public String testString(int indentation, int spacesPerIndent) {
+    public String debugString(int indentation, int spacesPerIndent) {
         final String outerIndent = " ".repeat(indentation * spacesPerIndent);
         final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
 

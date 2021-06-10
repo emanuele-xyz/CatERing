@@ -71,11 +71,11 @@ public class Activity {
         return tasks.contains(task);
     }
 
-    public String testString() {
-        return testString(0, 2);
+    public String debugString() {
+        return debugString(0, 2);
     }
 
-    public String testString(int indentation, int spacesPerIndent) {
+    public String debugString(int indentation, int spacesPerIndent) {
         final String outerIndent = " ".repeat(indentation * spacesPerIndent);
         final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
         final StringBuilder sb = new StringBuilder();
@@ -87,7 +87,7 @@ public class Activity {
         sb.append(indent).append("dosi gia' preparate: '").append(alreadyPreparedDoses).append('\'').append('\n');
         sb.append(indent).append("dosi proparate: '").append(preparedDoses).append('\'').append('\n');
         sb.append(indent).append("compiti:").append("{\n");
-        tasks.forEach(task -> sb.append(task.testString(indentation + 2, spacesPerIndent)).append(",\n"));
+        tasks.forEach(task -> sb.append(task.debugString(indentation + 2, spacesPerIndent)).append(",\n"));
         sb.append(indent).append("}\n");
         sb.append(outerIndent).append("}");
 

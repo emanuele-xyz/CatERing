@@ -33,7 +33,7 @@ public class TestKitchenManagement {
             Event e = CatERing.getInstance().getEventManager().getEvent(1);
             Service s = e.getService(2);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().generateSummarySheet(e, s);
-            System.out.println(e.testString());
+            System.out.println(e.debugString());
 
             System.out.println("-".repeat(80));
             System.out.println("TEST ADD ACTIVITY");

@@ -66,11 +66,11 @@ public class Task {
         }
     }
 
-    public String testString() {
-        return testString(0, 2);
+    public String debugString() {
+        return debugString(0, 2);
     }
 
-    public String testString(int indentation, int spacesPerIndent) {
+    public String debugString(int indentation, int spacesPerIndent) {
         final String outerIndent = " ".repeat(indentation * spacesPerIndent);
         final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
 
@@ -80,7 +80,7 @@ public class Task {
                 indent + "completato: " + completed + '\n' +
                 indent + "tempo stimato: " + estimatedTime + '\n' +
                 indent + "dosi stimate: " + estimatedDoses + '\n' +
-                indent + shift.testString(indentation, spacesPerIndent) + '\n' +
+                indent + shift.debugString(indentation, spacesPerIndent) + '\n' +
                 outerIndent + "}";
     }
 
