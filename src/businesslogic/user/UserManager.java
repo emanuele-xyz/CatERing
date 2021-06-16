@@ -14,9 +14,4 @@ public class UserManager {
     public User getCurrentUser() {
         return this.currentUser;
     }
-
-    // TODO: to be implemented
-    public List<User> getCooks() {
-        return null;
-    }
 }
