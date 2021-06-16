@@ -19,12 +19,16 @@ public class TestKitchenManagement {
     public static void main(String[] args) {
         try {
 
+            // ---------------------------------------------------------------------------------------------------------
+
             System.out.println("-".repeat(80));
             System.out.println("TEST FAKE LOGIN");
             System.out.println("-".repeat(80));
 
             CatERing.getInstance().getUserManager().fakeLogin("Lidia");
             System.out.println(CatERing.getInstance().getUserManager().getCurrentUser());
+
+            // ---------------------------------------------------------------------------------------------------------
 
             System.out.println("-".repeat(80));
             System.out.println("TEST CREATE SUMMARY SHEET");
@@ -34,6 +38,8 @@ public class TestKitchenManagement {
             Service s = e.getService(2);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().generateSummarySheet(e, s);
             System.out.println(e.debugString());
+
+            // ---------------------------------------------------------------------------------------------------------
 
             System.out.println("-".repeat(80));
             System.out.println("TEST ADD ACTIVITY");
@@ -45,10 +51,16 @@ public class TestKitchenManagement {
             Activity a3 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(2), "1 Kg", "20 g");
             System.out.println(sh.debugString());
 
+            // ---------------------------------------------------------------------------------------------------------
+
             System.out.println("-".repeat(80));
             System.out.println("TEST MOVE ACTIVITY");
             System.out.println("-".repeat(80));
+
             CatERing.getInstance().getKitchenTaskManager().moveActivity(a3, 0);
+            System.out.println(sh.debugString());
+
+            // ---------------------------------------------------------------------------------------------------------
 
             System.out.println("-".repeat(80));
             System.out.println("TEST GET KITCHEN SHIFTS SCHEDULE");
@@ -56,6 +68,9 @@ public class TestKitchenManagement {
 
             KitchenShiftSchedule kss = CatERing.getInstance().getShiftManager().getKitchenShiftSchedule();
             List<KitchenShift> kitchenShifts = kss.getKitchenShifts();
+            System.out.println(kss.debugString());
+
+            // ---------------------------------------------------------------------------------------------------------
 
             System.out.println("-".repeat(80));
             System.out.println("TEST CREATE TASK");
