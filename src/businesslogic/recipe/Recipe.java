@@ -38,7 +38,7 @@ public class Recipe implements KitchenProcedure {
     @Override
     // TODO: this should be implemented in Recipe Management use case
     public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
-        return Stream.of(this);
+        return Stream.empty();
     }
 
     // STATIC METHODS FOR PERSISTENCE
