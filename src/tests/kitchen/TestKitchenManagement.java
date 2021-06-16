@@ -41,6 +41,7 @@ public class TestKitchenManagement {
 
             // ---------------------------------------------------------------------------------------------------------
 
+            // TODO: add persistence!
             System.out.println("-".repeat(80));
             System.out.println("TEST ADD ACTIVITY");
             System.out.println("-".repeat(80));
