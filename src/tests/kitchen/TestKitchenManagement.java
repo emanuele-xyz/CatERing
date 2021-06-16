@@ -77,6 +77,7 @@ public class TestKitchenManagement {
             System.out.println("-".repeat(80));
             User cook = User.loadUserById(4);
             CatERing.getInstance().getKitchenTaskManager().createTask(a1, kitchenShifts.get(0), cook, 60, "3 porzioni");
+            System.out.println(sh.debugString());
 
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");

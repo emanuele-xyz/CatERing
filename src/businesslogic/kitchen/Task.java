@@ -80,7 +80,7 @@ public class Task {
                 indent + "completato: " + completed + '\n' +
                 indent + "tempo stimato: " + estimatedTime + '\n' +
                 indent + "dosi stimate: " + estimatedDoses + '\n' +
-                indent + shift.debugString(indentation, spacesPerIndent) + '\n' +
+                shift.debugString(indentation + 1, spacesPerIndent) + '\n' +
                 outerIndent + "}";
     }
 
