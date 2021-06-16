@@ -16,7 +16,7 @@ public class SummarySheet {
     }
 
     public SummarySheet(Menu menu) {
-        activities = new ArrayList<>();
+        this();
 
         List<KitchenProcedure> kitchenProcedures = menu.getRequiredKitchenProcedures();
         for (KitchenProcedure kp : kitchenProcedures) {

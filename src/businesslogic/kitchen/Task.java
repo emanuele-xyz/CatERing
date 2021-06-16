@@ -36,14 +36,6 @@ public class Task {
         return cook;
     }
 
-    public KitchenShift getShift() {
-        return shift;
-    }
-
-    public void setShift(KitchenShift shift) {
-        this.shift = shift;
-    }
-
     public void setCook(User cook) {
         this.cook = cook;
     }
@@ -54,6 +46,14 @@ public class Task {
 
     public boolean hasCook() {
         return cook != null;
+    }
+
+    public KitchenShift getShift() {
+        return shift;
+    }
+
+    public void setShift(KitchenShift shift) {
+        this.shift = shift;
     }
 
     public void editEstimates(Integer estimatedTime, String estimatedDoses) {

@@ -35,8 +35,8 @@ public class Recipe implements KitchenProcedure {
         return name;
     }
 
-    @Override
     // TODO: this should be implemented in Recipe Management use case
+    @Override
     public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
         return Stream.empty();
     }
