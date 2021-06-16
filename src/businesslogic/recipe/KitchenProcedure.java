@@ -11,4 +11,6 @@ public interface KitchenProcedure {
     default List<KitchenProcedure> getRequiredKitchenProcedures() {
         return getRequiredKitchenProceduresStream().collect(Collectors.toList());
     }
+
+    int getId();
 }

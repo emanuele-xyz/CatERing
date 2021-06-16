@@ -4,8 +4,12 @@ import businesslogic.recipe.KitchenProcedure;
 import businesslogic.recipe.Recipe;
 import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
+import persistence.BatchUpdateHandler;
 import persistence.PersistenceManager;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Activity {
@@ -124,5 +128,29 @@ public class Activity {
         });
 
         return activities;
+    }
+
+    // TODO: to be implemented
+    public static void saveAllNewActivities(int summarySheetID, List<Activity> activities) {
+        String insert = "INSERT INTO catering.activities (summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses) VALUES (?, ?, ?, ?, ?)";
+        PersistenceManager.executeBatchUpdate(insert, activities.size(), new BatchUpdateHandler() {
+            @Override
+            public void handleBatchItem(PreparedStatement ps, int batchCount) throws SQLException {
+                Activity activity = activities.get(batchCount);
+                ps.setInt(1, summarySheetID);
+                ps.setInt(2, activity.kitchenProcedure.getId());
+                ps.setString(3, activity.dosesToPrepare);
+                ps.setString(4, activity.alreadyPreparedDoses);
+                ps.setString(5, activity.preparedDoses);
+            }
+
+            @Override
+            public void handleGeneratedIds(ResultSet rs, int count) throws SQLException {
+                Activity activity = activities.get(count);
+                activity.id = rs.getInt(1);
+
+                cache.put(activity.id, activity);
+            }
+        });
     }
 }

@@ -11,10 +11,9 @@ import java.util.List;
 
 public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
 
-    // TODO: to be implemented
     @Override
     public void updateSummarySheetCreated(Event event, Service service, SummarySheet summarySheet) {
-        System.out.println("Saving new summary sheet ...");
+        SummarySheet.saveNewSummarySheet(service, summarySheet);
     }
 
     @Override

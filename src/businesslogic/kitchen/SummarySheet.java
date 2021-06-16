@@ -1,5 +1,6 @@
 package businesslogic.kitchen;
 
+import businesslogic.event.Service;
 import businesslogic.menu.Menu;
 import businesslogic.recipe.KitchenProcedure;
 import persistence.PersistenceManager;
@@ -31,20 +32,19 @@ public class SummarySheet {
     public List<Activity> addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) {
         List<Activity> res = new ArrayList<>();
 
-        {
-            Activity activity = new Activity(kitchenProcedure, toPrepare, prepared);
+        List<KitchenProcedure> kitchenProcedures = kitchenProcedure.getRequiredKitchenProcedures();
+        kitchenProcedures.forEach(kp -> {
+            Activity activity;
+
+            if (kp.equals(kitchenProcedure)) {
+                activity = new Activity(kp, toPrepare, prepared);
+            } else {
+                activity = new Activity(kp);
+            }
+
             activities.add(activity);
             res.add(activity);
-        }
-
-        {
-            List<KitchenProcedure> kitchenProcedures = kitchenProcedure.getRequiredKitchenProcedures();
-            kitchenProcedures.forEach(kp -> {
-                Activity activity = new Activity(kp);
-                activities.add(activity);
-                res.add(activity);
-            });
-        }
+        });
 
         return res;
     }
@@ -104,5 +104,15 @@ public class SummarySheet {
         });
 
         return cache.get(sh.id);
+    }
+
+    // TODO: to be implemented
+    public static void saveNewSummarySheet(Service service, SummarySheet summarySheet) {
+        String insert = String.format("INSERT INTO catering.summary_sheets (service_id) VALUES (%d)", service.getId());
+        summarySheet.id = PersistenceManager.executeUpdate(insert);
+
+        Activity.saveAllNewActivities(summarySheet.id, summarySheet.activities);
+
+        cache.put(summarySheet.id, summarySheet);
     }
 }

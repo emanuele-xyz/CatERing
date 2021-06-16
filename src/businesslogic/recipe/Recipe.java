@@ -27,6 +27,7 @@ public class Recipe implements KitchenProcedure {
         return name;
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -38,7 +39,7 @@ public class Recipe implements KitchenProcedure {
     // TODO: this should be implemented in Recipe Management use case
     @Override
     public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
-        return Stream.empty();
+        return Stream.of(this);
     }
 
     // STATIC METHODS FOR PERSISTENCE
