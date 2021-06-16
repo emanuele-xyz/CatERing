@@ -89,7 +89,6 @@ public class SummarySheet {
 
     private static final Map<Integer, SummarySheet> cache = new HashMap<>();
 
-    // TODO: to be implemented
     public static SummarySheet loadSummarySheetByServiceID(int serviceID) {
         SummarySheet sh = new SummarySheet();
         String query = String.format("SELECT * FROM summary_sheets WHERE service_id = %d", serviceID);

@@ -51,7 +51,6 @@ public class KitchenShift {
 
     private static final Map<Integer, KitchenShift> cache = new HashMap<>();
 
-    // TODO: to be implemented
     public static KitchenShift loadKitchenShiftByID(int kitchenShiftID) {
         if (cache.containsKey(kitchenShiftID)) return cache.get(kitchenShiftID);
 
@@ -70,7 +69,6 @@ public class KitchenShift {
         return cache.get(kitchenShiftID);
     }
 
-    // TODO: to be implemented
     public static List<KitchenShift> loadAllKitchenShift() {
         List<KitchenShift> kitchenShifts = new ArrayList<>();
 

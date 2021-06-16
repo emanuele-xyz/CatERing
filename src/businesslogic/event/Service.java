@@ -61,7 +61,6 @@ public class Service {
 
     private static final Map<Integer, Service> cache = new HashMap<>();
 
-    // TODO: to be implemented
     public static List<Service> loadServicesByEventID(int eventID) {
         List<Service> services = new ArrayList<>();
 

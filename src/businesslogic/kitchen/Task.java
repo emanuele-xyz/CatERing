@@ -88,7 +88,6 @@ public class Task {
 
     private static final Map<Integer, Task> cache = new HashMap<>();
 
-    // TODO: to be implemented
     public static List<Task> loadTasksByActivityID(int activityID) {
         List<Task> tasks = new ArrayList<>();
 

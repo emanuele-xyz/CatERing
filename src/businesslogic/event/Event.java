@@ -31,7 +31,6 @@ public class Event {
         return this.organizer == user;
     }
 
-    // TODO: to be implemented
     public Service getService(int id) {
         return services.stream().filter(service -> service.getId() == id).findAny().orElse(null);
     }
@@ -63,7 +62,6 @@ public class Event {
 
     private static final Map<Integer, Event> cache = new HashMap<>();
 
-    // TODO: to be implemented
     public static Event loadEventByID(int eventID) {
         if (cache.containsKey(eventID)) return cache.get(eventID);
 

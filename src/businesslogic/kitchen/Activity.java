@@ -98,7 +98,6 @@ public class Activity {
 
     private static final Map<Integer, Activity> cache = new HashMap<>();
 
-    // TODO: to be implemented
     public static List<Activity> loadActivitiesBySummarySheetID(int summarySheetID) {
         List<Activity> activities = new ArrayList<>();
 
@@ -112,7 +111,8 @@ public class Activity {
             } else {
                 Activity activity = new Activity();
                 activity.id = activityID;
-                activity.kitchenProcedure = Recipe.loadRecipeById(rs.getInt("kitchen_procedure_id")); // TODO: to be reworked
+                // TODO: to be reworked when preparations are also present
+                activity.kitchenProcedure = Recipe.loadRecipeById(rs.getInt("kitchen_procedure_id"));
                 activity.tasks = Task.loadTasksByActivityID(activity.id);
                 activity.dosesToPrepare = rs.getString("doses_to_prepare");
                 activity.alreadyPreparedDoses = rs.getString("already_prepared_doses");

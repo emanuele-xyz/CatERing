@@ -8,7 +8,6 @@ public class EventManager {
         return EventInfo.loadAllEventInfo();
     }
 
-    // TODO: to be implemented
     public Event getEvent(int id) {
         return Event.loadEventByID(id);
     }

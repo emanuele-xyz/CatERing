@@ -400,7 +400,6 @@ public class Menu {
         loadedMenus.remove(m);
     }
 
-    // TODO: to be implemented
     public static Menu loadMenuByID(int menuID) {
         if (loadedMenus.containsKey(menuID)) {
             return loadedMenus.get(menuID);
