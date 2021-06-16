@@ -19,6 +19,10 @@ public class TestKitchenManagement2b {
 
             // ---------------------------------------------------------------------------------------------------------
 
+            System.out.println("-".repeat(80));
+            System.out.println("TEST EDIT ACTIVITY");
+            System.out.println("-".repeat(80));
+
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");
             e.printStackTrace();

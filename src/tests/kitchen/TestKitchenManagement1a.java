@@ -19,6 +19,10 @@ public class TestKitchenManagement1a {
 
             // ---------------------------------------------------------------------------------------------------------
 
+            System.out.println("-".repeat(80));
+            System.out.println("TEST OPEN SUMMARY SHEET");
+            System.out.println("-".repeat(80));
+
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");
             e.printStackTrace();
