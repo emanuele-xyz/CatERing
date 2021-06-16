@@ -1,7 +1,5 @@
 package businesslogic.user;
 
-import java.util.List;
-
 public class UserManager {
 
     private User currentUser;
