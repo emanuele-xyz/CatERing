@@ -2,7 +2,7 @@ package businesslogic;
 
 import businesslogic.event.EventManager;
 import businesslogic.kitchen.KitchenTaskManager;
-import businesslogic.kitchen.KitchenTaskPersistence;
+import persistence.KitchenTaskPersistence;
 import businesslogic.menu.MenuManager;
 import businesslogic.recipe.RecipeManager;
 import businesslogic.shift.ShiftManager;
