@@ -1,4 +1,4 @@
-package tests.kitchen;
+/*package tests.kitchen;
 
 import businesslogic.CatERing;
 import businesslogic.UseCaseLogicException;
@@ -30,4 +30,4 @@ public class TestKitchenManagement5d {
             e.printStackTrace();
         }
     }
-}
+}*/
