@@ -17,7 +17,7 @@ public class TestKitchenManagement1a {
             System.out.println("TEST FAKE LOGIN");
             System.out.println("-".repeat(80));
 
-            CatERing.getInstance().getUserManager().fakeLogin("Lidia");
+            CatERing.getInstance().getUserManager().fakeLogin("Carlin");
             System.out.println(CatERing.getInstance().getUserManager().getCurrentUser());
 
             // ---------------------------------------------------------------------------------------------------------
@@ -26,8 +26,8 @@ public class TestKitchenManagement1a {
             System.out.println("TEST OPEN SUMMARY SHEET");
             System.out.println("-".repeat(80));
 
-            Event event = CatERing.getInstance().getEventManager().getEvent(1);
-            Service service = event.getService(2);
+            Event event = CatERing.getInstance().getEventManager().getEvent(3);
+            Service service = event.getService(7);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().openSummarySheet(event, service);
             System.out.println(sh.debugString());
 

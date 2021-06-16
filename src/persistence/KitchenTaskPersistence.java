@@ -17,11 +17,8 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
         System.out.println("Saving new summary sheet ...");
     }
 
-    // TODO: to be implemented
     @Override
-    public void updateSummarySheetOpened(Event event, Service service, SummarySheet summarySheet) {
-        System.out.println("Opening existing summary sheet ...");
-    }
+    public void updateSummarySheetOpened(Event event, Service service, SummarySheet summarySheet) {}
 
     // TODO: to be implemented
     @Override
