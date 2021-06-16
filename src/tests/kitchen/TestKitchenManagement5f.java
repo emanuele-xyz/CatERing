@@ -23,6 +23,8 @@ public class TestKitchenManagement5f {
             System.out.println("TEST REMOVE TASK");
             System.out.println("-".repeat(80));
 
+            CatERing.getInstance().getKitchenTaskManager().removeTask(task);
+
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");
             e.printStackTrace();

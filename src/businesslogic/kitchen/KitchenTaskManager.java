@@ -39,7 +39,7 @@ public class KitchenTaskManager {
         return currentSummarySheet;
     }
 
-    public void openSummarySheet(Event event, Service service) throws UseCaseLogicException, KitchenTaskException {
+    public SummarySheet openSummarySheet(Event event, Service service) throws UseCaseLogicException, KitchenTaskException {
         if (!event.consistsOf(service) || service.getSummarySheet() == null) {
             throw new UseCaseLogicException();
         }
@@ -51,6 +51,8 @@ public class KitchenTaskManager {
 
         currentSummarySheet = service.getSummarySheet();
         notifySummarySheetOpened(event, service, currentSummarySheet);
+
+        return currentSummarySheet;
     }
 
     public Activity addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) throws UseCaseLogicException {
@@ -64,7 +66,7 @@ public class KitchenTaskManager {
         return addedActivities.get(0);
     }
 
-    private void removeActivity(Activity activity) throws UseCaseLogicException, KitchenTaskException {
+    public void removeActivity(Activity activity) throws UseCaseLogicException, KitchenTaskException {
         if (currentSummarySheet == null || !currentSummarySheet.hasActivity(activity)) {
             throw new UseCaseLogicException();
         }

@@ -23,6 +23,8 @@ public class TestKitchenManagement5e {
             System.out.println("TEST EDIT TASK ESTIMATES");
             System.out.println("-".repeat(80));
 
+            CatERing.getInstance().getKitchenTaskManager().editTaskEstimates(task, 70, "8 porzioni");
+
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");
             e.printStackTrace();

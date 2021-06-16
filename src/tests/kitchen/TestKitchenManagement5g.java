@@ -23,6 +23,8 @@ public class TestKitchenManagement5g {
             System.out.println("TEST MARK KITCHEN SHIFT AS FULL");
             System.out.println("-".repeat(80));
 
+            CatERing.getInstance().getShiftManager().markKitchenShiftAsFull(kitchenShift);
+
         } catch (KitchenTaskException | UseCaseLogicException e) {
             System.out.println("Errore di logica nello use case");
             e.printStackTrace();
