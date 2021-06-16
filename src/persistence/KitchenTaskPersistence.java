@@ -1,7 +1,11 @@
-package businesslogic.kitchen;
+package persistence;
 
 import businesslogic.event.Event;
 import businesslogic.event.Service;
+import businesslogic.kitchen.Activity;
+import businesslogic.kitchen.KitchenTaskEventReceiver;
+import businesslogic.kitchen.SummarySheet;
+import businesslogic.kitchen.Task;
 
 import java.util.List;
 
@@ -16,7 +20,7 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
     // TODO: to be implemented
     @Override
     public void updateSummarySheetOpened(Event event, Service service, SummarySheet summarySheet) {
-        System.out.println("Updating existing summary sheet ...");
+        System.out.println("Opening existing summary sheet ...");
     }
 
     // TODO: to be implemented
