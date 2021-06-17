@@ -182,4 +182,10 @@ public class Task {
         String update = String.format("UPDATE catering.tasks SET cook_id = %d WHERE id = %d", task.cook.getID(), task.id);
         PersistenceManager.executeUpdate(update);
     }
+
+    // TODO: to be implemented
+    public static void updateRemoveCook(Task task) {
+        String update = String.format("UPDATE catering.tasks SET cook_id = null WHERE id = %d", task.id);
+        PersistenceManager.executeUpdate(update);
+    }
 }
