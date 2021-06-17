@@ -143,4 +143,17 @@ public class Task {
             }
         });
     }
+
+    // TODO: to be implemented
+    public static void saveNewTask(int activityID, Task task) {
+        String insert = String.format("INSERT INTO catering.tasks " +
+                "(activity_id, kitchen_shift_id, cook_id, completed, estimated_time, estimated_doses) VALUES " +
+                "(%d, %d, %d, %b, %d, '%s')",
+                activityID, task.shift.getID(), task.cook.getID(), task.completed, task.estimatedTime, task.estimatedDoses);
+
+        PersistenceManager.executeUpdate(insert);
+        task.id = PersistenceManager.getLastId();
+
+        cache.put(task.id, task);
+    }
 }
