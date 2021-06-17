@@ -156,4 +156,12 @@ public class Task {
 
         cache.put(task.id, task);
     }
+
+    // TODO: to be implemented
+    public static void deleteTask(Task task) {
+        String delete = String.format("DELETE FROM catering.tasks WHERE id = %d", task.id);
+        PersistenceManager.executeUpdate(delete);
+
+        cache.remove(task.id);
+    }
 }

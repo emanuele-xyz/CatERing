@@ -97,7 +97,7 @@ public class KitchenTaskManager {
         notifyActivitiesRearranged(currentSummarySheet);
     }
 
-    public void createTask(Activity activity, KitchenShift shift, User cook, Integer estimatedTime, String estimatedDoses) throws UseCaseLogicException, KitchenTaskException {
+    public Task createTask(Activity activity, KitchenShift shift, User cook, Integer estimatedTime, String estimatedDoses) throws UseCaseLogicException, KitchenTaskException {
         if (currentSummarySheet == null || !currentSummarySheet.hasActivity(activity)) {
             throw new UseCaseLogicException();
         }
@@ -108,6 +108,8 @@ public class KitchenTaskManager {
 
         Task task = activity.createTask(shift, cook, estimatedTime, estimatedDoses);
         notifyTaskCreated(currentSummarySheet, activity, task);
+
+        return task;
     }
 
     public void editTaskActivity(Task task, Activity newActivity) throws UseCaseLogicException, KitchenTaskException {
