@@ -64,7 +64,7 @@ public class Service {
     public static List<Service> loadServicesByEventID(int eventID) {
         List<Service> services = new ArrayList<>();
 
-        String query = String.format("SELECT * FROM services WHERE event_id = %d", eventID);
+        String query = String.format("SELECT * FROM catering.services WHERE event_id = %d", eventID);
         PersistenceManager.executeQuery(query, rs -> {
             final int serviceID = rs.getInt("id");
             if (serviceID <= 0) return;

@@ -103,7 +103,7 @@ public class SummarySheet {
 
     public static SummarySheet loadSummarySheetByServiceID(int serviceID) {
         SummarySheet sh = new SummarySheet();
-        String query = String.format("SELECT * FROM summary_sheets WHERE service_id = %d", serviceID);
+        String query = String.format("SELECT * FROM catering.summary_sheets WHERE service_id = %d", serviceID);
         PersistenceManager.executeQuery(query, rs -> {
             final int summarySheetID = rs.getInt("id");
             if (summarySheetID <= 0) return;
@@ -121,7 +121,8 @@ public class SummarySheet {
     // TODO: to be implemented
     public static void saveNewSummarySheet(Service service, SummarySheet summarySheet) {
         String insert = String.format("INSERT INTO catering.summary_sheets (service_id) VALUES (%d)", service.getId());
-        summarySheet.id = PersistenceManager.executeUpdate(insert);
+        PersistenceManager.executeUpdate(insert);
+        summarySheet.id = PersistenceManager.getLastId();
 
         Activity.saveAllNewActivities(summarySheet.id, summarySheet.activities);
 

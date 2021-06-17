@@ -105,7 +105,7 @@ public class Activity {
     public static List<Activity> loadActivitiesBySummarySheetID(int summarySheetID) {
         List<Activity> activities = new ArrayList<>();
 
-        String query = String.format("SELECT * FROM activities WHERE summary_sheet_id = %d ORDER BY position", summarySheetID);
+        String query = String.format("SELECT * FROM catering.activities WHERE summary_sheet_id = %d ORDER BY position", summarySheetID);
         PersistenceManager.executeQuery(query, rs -> {
             final int activityID = rs.getInt("id");
             if (activityID <= 0) return;
