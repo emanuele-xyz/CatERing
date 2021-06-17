@@ -3,8 +3,12 @@ package businesslogic.kitchen;
 import businesslogic.event.Service;
 import businesslogic.menu.Menu;
 import businesslogic.recipe.KitchenProcedure;
+import persistence.BatchUpdateHandler;
 import persistence.PersistenceManager;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class SummarySheet {
@@ -126,6 +130,19 @@ public class SummarySheet {
 
     // TODO: to be implemented
     public static void saveActivitiesOrder(SummarySheet summarySheet) {
+        String update = "UPDATE catering.activities SET position = ? WHERE id = ?";
+        PersistenceManager.executeBatchUpdate(update, summarySheet.activities.size(), new BatchUpdateHandler() {
+            @Override
+            public void handleBatchItem(PreparedStatement ps, int batchCount) throws SQLException {
+                Activity activity = summarySheet.activities.get(batchCount);
+                ps.setInt(1, batchCount);
+                ps.setInt(2, activity.getID());
+            }
 
+            @Override
+            public void handleGeneratedIds(ResultSet rs, int count) {
+                // no generated IDs to handle
+            }
+        });
     }
 }
