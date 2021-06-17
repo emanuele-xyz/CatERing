@@ -178,4 +178,14 @@ public class Activity {
 
         cache.remove(activity.id);
     }
+
+    // TODO: to be implemented
+    public static void saveActivityAnnotations(Activity activity) {
+        String update = String.format("UPDATE catering.activities SET " +
+                "doses_to_prepare = '%s', already_prepared_doses = '%s', prepared_doses = '%s' " +
+                "WHERE id = %d",
+                activity.dosesToPrepare, activity.alreadyPreparedDoses, activity.preparedDoses, activity.id);
+
+        PersistenceManager.executeUpdate(update);
+    }
 }

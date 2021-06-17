@@ -34,10 +34,9 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
         Activity.deleteActivity(activity);
     }
 
-    // TODO: to be implemented
     @Override
     public void updateActivityModified(SummarySheet summarySheet, Activity activity) {
-        System.out.println("Modifying summary sheet activity ...");
+        Activity.saveActivityAnnotations(activity);
     }
 
     @Override
