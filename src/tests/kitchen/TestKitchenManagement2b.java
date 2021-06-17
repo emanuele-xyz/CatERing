@@ -16,14 +16,8 @@ public class TestKitchenManagement2b {
 
             // ---------------------------------------------------------------------------------------------------------
 
-            System.out.println("-".repeat(80));
-            System.out.println("TEST FAKE LOGIN");
-            System.out.println("-".repeat(80));
-
+            // Login
             CatERing.getInstance().getUserManager().fakeLogin("Lidia");
-            System.out.println(CatERing.getInstance().getUserManager().getCurrentUser());
-
-            // ---------------------------------------------------------------------------------------------------------
 
             System.out.println("-".repeat(80));
             System.out.println("TEST EDIT ACTIVITY");
