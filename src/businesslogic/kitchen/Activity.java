@@ -130,7 +130,6 @@ public class Activity {
         return activities;
     }
 
-    // TODO: to be implemented
     public static void saveAllNewActivities(int summarySheetID, List<Activity> activities) {
         String insert = "INSERT INTO catering.activities (summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (?, ?, ?, ?, ?, ?)";
         PersistenceManager.executeBatchUpdate(insert, activities.size(), new BatchUpdateHandler() {
@@ -157,7 +156,6 @@ public class Activity {
         activities.forEach(activity -> Task.saveAllNewTasks(activity.id, activity.tasks));
     }
 
-    // TODO: to be implemented
     public static void saveNewActivity(int summarySheetID, Activity activity, int position) {
         String insert = String.format("INSERT INTO catering.activities " +
                 "(summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES " +
@@ -171,7 +169,6 @@ public class Activity {
         cache.put(activity.id, activity);
     }
 
-    // TODO: to be implemented
     public static void deleteActivity(Activity activity) {
         String delete = String.format("DELETE FROM catering.activities WHERE id = %d", activity.id);
         PersistenceManager.executeUpdate(delete);
@@ -181,7 +178,6 @@ public class Activity {
         cache.remove(activity.id);
     }
 
-    // TODO: to be implemented
     public static void saveActivityAnnotations(Activity activity) {
         String update = String.format("UPDATE catering.activities SET " +
                 "doses_to_prepare = '%s', already_prepared_doses = '%s', prepared_doses = '%s' " +

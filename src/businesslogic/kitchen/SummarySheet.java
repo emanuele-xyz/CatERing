@@ -114,7 +114,6 @@ public class SummarySheet {
         return cache.get(sh.id);
     }
 
-    // TODO: to be implemented
     public static void saveNewSummarySheet(Service service, SummarySheet summarySheet) {
         String insert = String.format("INSERT INTO catering.summary_sheets (service_id) VALUES (%d)", service.getId());
         PersistenceManager.executeUpdate(insert);
@@ -125,7 +124,6 @@ public class SummarySheet {
         cache.put(summarySheet.id, summarySheet);
     }
 
-    // TODO: to be implemented
     public static void saveActivitiesOrder(SummarySheet summarySheet) {
         String update = "UPDATE catering.activities SET position = ? WHERE id = ?";
         PersistenceManager.executeBatchUpdate(update, summarySheet.activities.size(), new BatchUpdateHandler() {

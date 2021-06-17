@@ -119,7 +119,6 @@ public class Task {
         return tasks;
     }
 
-    // TODO: to be implemented
     public static void saveAllNewTasks(int activityID, List<Task> tasks) {
         String inset = "INSERT INTO catering.tasks (activity_id, kitchen_shift_id, cook_id, completed, estimated_time, estimated_doses) VALUES (?, ?, ?, ?, ?, ?)";
         PersistenceManager.executeBatchUpdate(inset, tasks.size(), new BatchUpdateHandler() {
@@ -144,7 +143,6 @@ public class Task {
         });
     }
 
-    // TODO: to be implemented
     public static void saveNewTask(int activityID, Task task) {
         String insert = String.format("INSERT INTO catering.tasks " +
                 "(activity_id, kitchen_shift_id, cook_id, completed, estimated_time, estimated_doses) VALUES " +
@@ -157,7 +155,6 @@ public class Task {
         cache.put(task.id, task);
     }
 
-    // TODO: to be implemented
     public static void deleteTask(Task task) {
         String delete = String.format("DELETE FROM catering.tasks WHERE id = %d", task.id);
         PersistenceManager.executeUpdate(delete);
@@ -165,31 +162,26 @@ public class Task {
         cache.remove(task.id);
     }
 
-    // TODO: to be implemented
     public static void updateActivity(int newActivityID, Task task) {
         String update = String.format("UPDATE catering.tasks SET activity_id = %d WHERE id = %d", newActivityID, task.id);
         PersistenceManager.executeUpdate(update);
     }
 
-    // TODO: to be implemented
     public static void updateShift(Task task) {
         String update = String.format("UPDATE catering.tasks SET kitchen_shift_id = %d WHERE id = %d", task.shift.getID(), task.id);
         PersistenceManager.executeUpdate(update);
     }
 
-    // TODO: to be implemented
     public static void updateCook(Task task) {
         String update = String.format("UPDATE catering.tasks SET cook_id = %d WHERE id = %d", task.cook.getID(), task.id);
         PersistenceManager.executeUpdate(update);
     }
 
-    // TODO: to be implemented
     public static void updateRemoveCook(Task task) {
         String update = String.format("UPDATE catering.tasks SET cook_id = null WHERE id = %d", task.id);
         PersistenceManager.executeUpdate(update);
     }
 
-    // TODO: to be implemented
     public static void updateEstimates(Task task) {
         String update = String.format("UPDATE catering.tasks SET estimated_time = %d, estimated_doses = '%s' WHERE id = %d",
                 task.estimatedTime, task.estimatedDoses, task.id);
