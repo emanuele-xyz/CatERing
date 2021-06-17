@@ -10,14 +10,7 @@ public class TestKitchenManagement5g {
 
             // ---------------------------------------------------------------------------------------------------------
 
-            System.out.println("-".repeat(80));
-            System.out.println("TEST FAKE LOGIN");
-            System.out.println("-".repeat(80));
-
             CatERing.getInstance().getUserManager().fakeLogin("Lidia");
-            System.out.println(CatERing.getInstance().getUserManager().getCurrentUser());
-
-            // ---------------------------------------------------------------------------------------------------------
 
             System.out.println("-".repeat(80));
             System.out.println("TEST MARK KITCHEN SHIFT AS FULL");
