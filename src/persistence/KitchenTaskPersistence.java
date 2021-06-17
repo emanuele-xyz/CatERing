@@ -69,10 +69,9 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
         Task.updateRemoveCook(task);
     }
 
-    // TODO: to be implemented
     @Override
     public void updateTaskEstimatesModified(SummarySheet summarySheet, Activity activity, Task task) {
-        System.out.println("Updating task estimates for summary sheet ...");
+        Task.updateEstimates(task);
     }
 
     @Override
