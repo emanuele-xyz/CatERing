@@ -119,6 +119,7 @@ public class Task {
         return tasks;
     }
 
+    // TODO: to be implemented
     public static void saveAllNewTasks(int activityID, List<Task> tasks) {
         String inset = "INSERT INTO catering.tasks (activity_id, kitchen_shift_id, cook_id, completed, estimated_time, estimated_doses) VALUES (?, ?, ?, ?, ?, ?)";
         PersistenceManager.executeBatchUpdate(inset, tasks.size(), new BatchUpdateHandler() {

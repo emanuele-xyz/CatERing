@@ -29,6 +29,10 @@ public class SummarySheet {
         return id;
     }
 
+    public int getActivitiesSize() {
+        return activities.size();
+    }
+
     public List<Activity> addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) {
         List<Activity> res = new ArrayList<>();
 
@@ -64,6 +68,10 @@ public class SummarySheet {
 
     public Activity getActivityByTask(Task task) {
         return activities.stream().filter(activity -> activity.hasTask(task)).findAny().orElse(null);
+    }
+
+    public int findActivityPosition(Activity activity) {
+        return activities.indexOf(activity);
     }
 
     public String debugString() {
@@ -114,5 +122,10 @@ public class SummarySheet {
         Activity.saveAllNewActivities(summarySheet.id, summarySheet.activities);
 
         cache.put(summarySheet.id, summarySheet);
+    }
+
+    // TODO: to be implemented
+    public static void saveActivitiesOrder(SummarySheet summarySheet) {
+
     }
 }

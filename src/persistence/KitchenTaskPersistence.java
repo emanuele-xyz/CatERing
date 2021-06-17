@@ -21,7 +21,12 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
 
     @Override
     public void updateActivityAdded(SummarySheet summarySheet, List<Activity> activities) {
-        Activity.saveAllNewActivities(summarySheet.getID(), activities);
+        int summarySheetID = summarySheet.getID();
+
+        activities.forEach(activity -> {
+            int position = summarySheet.findActivityPosition(activity);
+            Activity.saveNewActivity(summarySheetID, activity, position);
+        });
     }
 
     // TODO: to be implemented
@@ -36,10 +41,9 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
         System.out.println("Modifying summary sheet activity ...");
     }
 
-    // TODO: to be implemented
     @Override
     public void updateActivitiesRearranged(SummarySheet summarySheet) {
-        System.out.println("Modifying summary sheet activity order ...");
+        SummarySheet.saveActivitiesOrder(summarySheet);
     }
 
     // TODO: to be implemented

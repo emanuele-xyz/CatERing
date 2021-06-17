@@ -105,7 +105,7 @@ public class Activity {
     public static List<Activity> loadActivitiesBySummarySheetID(int summarySheetID) {
         List<Activity> activities = new ArrayList<>();
 
-        String query = String.format("SELECT * FROM activities WHERE summary_sheet_id = %d", summarySheetID);
+        String query = String.format("SELECT * FROM activities WHERE summary_sheet_id = %d ORDER BY position", summarySheetID);
         PersistenceManager.executeQuery(query, rs -> {
             final int activityID = rs.getInt("id");
             if (activityID <= 0) return;
@@ -132,7 +132,7 @@ public class Activity {
 
     // TODO: to be implemented
     public static void saveAllNewActivities(int summarySheetID, List<Activity> activities) {
-        String insert = "INSERT INTO catering.activities (summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses) VALUES (?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO catering.activities (summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (?, ?, ?, ?, ?, ?)";
         PersistenceManager.executeBatchUpdate(insert, activities.size(), new BatchUpdateHandler() {
             @Override
             public void handleBatchItem(PreparedStatement ps, int batchCount) throws SQLException {
@@ -142,6 +142,7 @@ public class Activity {
                 ps.setString(3, activity.dosesToPrepare);
                 ps.setString(4, activity.alreadyPreparedDoses);
                 ps.setString(5, activity.preparedDoses);
+                ps.setInt(6, batchCount);
             }
 
             @Override
@@ -154,5 +155,19 @@ public class Activity {
         });
 
         activities.forEach(activity -> Task.saveAllNewTasks(activity.id, activity.tasks));
+    }
+
+    // TODO: to be implemented
+    public static void saveNewActivity(int summarySheetID, Activity activity, int position) {
+        String insert = String.format("INSERT INTO catering.activities " +
+                "(summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES " +
+                "(%d, %d, '%s', '%s', '%s', %d)",
+                summarySheetID, activity.kitchenProcedure.getId(), activity.dosesToPrepare,
+                activity.alreadyPreparedDoses, activity.preparedDoses, position);
+
+        PersistenceManager.executeUpdate(insert);
+        activity.id = PersistenceManager.getLastId();
+
+        cache.put(activity.id, activity);
     }
 }
