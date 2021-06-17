@@ -1,5 +1,7 @@
 package businesslogic.shift;
 
+import persistence.ShiftPersistence;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,14 @@ public class ShiftManager {
     }
 
     // EVENT SENDER
+
+    public void addEventReceiver(ShiftEventReceiver shiftEventReceiver) {
+        eventReceivers.add(shiftEventReceiver);
+    }
+
+    public void removeEventReceiver(ShiftEventReceiver shiftEventReceiver) {
+        eventReceivers.remove(shiftEventReceiver);
+    }
 
     private void notifyKitchenShiftFulled(KitchenShift kitchenShift) {
         eventReceivers.forEach(er -> er.updateKitchenShiftFulled(kitchenShift));

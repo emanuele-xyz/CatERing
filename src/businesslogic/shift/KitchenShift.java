@@ -93,4 +93,10 @@ public class KitchenShift {
 
         return kitchenShifts;
     }
+
+    // TODO: to be implemented
+    public static void updateMarkAsFull(KitchenShift kitchenShift) {
+        String update = String.format("UPDATE catering.kitchen_shifts SET is_full = true WHERE id = %d", kitchenShift.id);
+        PersistenceManager.executeUpdate(update);
+    }
 }
