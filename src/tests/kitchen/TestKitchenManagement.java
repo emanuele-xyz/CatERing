@@ -46,9 +46,7 @@ public class TestKitchenManagement {
             System.out.println("-".repeat(80));
 
             ObservableList<Recipe> recipes = CatERing.getInstance().getRecipeManager().getRecipes();
-            Activity a1 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(0), "12 porzioni", "nessuna porzione");
-            Activity a2 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(1), "7 piatti", "nessun piatto");
-            Activity a3 = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(2), "1 Kg", "20 g");
+            Activity activity = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(0), "12 porzioni", "nessuna porzione");
             System.out.println(sh.debugString());
 
             // ---------------------------------------------------------------------------------------------------------
@@ -57,7 +55,7 @@ public class TestKitchenManagement {
             System.out.println("TEST MOVE ACTIVITY");
             System.out.println("-".repeat(80));
 
-            CatERing.getInstance().getKitchenTaskManager().moveActivity(a3, 0);
+            CatERing.getInstance().getKitchenTaskManager().moveActivity(activity, 0);
             System.out.println(sh.debugString());
 
             // ---------------------------------------------------------------------------------------------------------
@@ -76,7 +74,7 @@ public class TestKitchenManagement {
             System.out.println("TEST CREATE TASK");
             System.out.println("-".repeat(80));
             User cook = User.loadUserById(4);
-            CatERing.getInstance().getKitchenTaskManager().createTask(a1, kitchenShifts.get(0), cook, 60, "3 porzioni");
+            CatERing.getInstance().getKitchenTaskManager().createTask(activity, kitchenShifts.get(0), cook, 60, "3 porzioni");
             System.out.println(sh.debugString());
 
         } catch (KitchenTaskException | UseCaseLogicException e) {
