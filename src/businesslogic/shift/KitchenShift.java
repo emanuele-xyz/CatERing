@@ -15,6 +15,10 @@ public class KitchenShift {
 
     private KitchenShift() {}
 
+    public int getID() {
+        return id;
+    }
+
     public boolean isFull() {
         return isFull;
     }

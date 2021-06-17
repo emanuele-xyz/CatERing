@@ -195,7 +195,7 @@ public class Menu {
     }
 
     public boolean isOwner(User u) {
-        return u.getId() == this.owner.getId();
+        return u.getID() == this.owner.getID();
     }
 
     public ObservableMap<String, Boolean> getFeatures() {
@@ -312,7 +312,7 @@ public class Menu {
             @Override
             public void handleBatchItem(PreparedStatement ps, int batchCount) throws SQLException {
                 ps.setString(1, PersistenceManager.escapeString(m.title));
-                ps.setInt(2, m.owner.getId());
+                ps.setInt(2, m.owner.getID());
                 ps.setBoolean(3, m.published);
             }
 

@@ -19,10 +19,9 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
     @Override
     public void updateSummarySheetOpened(Event event, Service service, SummarySheet summarySheet) {}
 
-    // TODO: to be implemented
     @Override
     public void updateActivityAdded(SummarySheet summarySheet, List<Activity> activities) {
-        System.out.println("Adding activity to summary sheet ...");
+        Activity.saveAllNewActivities(summarySheet.getID(), activities);
     }
 
     // TODO: to be implemented

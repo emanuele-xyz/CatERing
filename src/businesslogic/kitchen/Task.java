@@ -2,8 +2,12 @@ package businesslogic.kitchen;
 
 import businesslogic.shift.KitchenShift;
 import businesslogic.user.User;
+import persistence.BatchUpdateHandler;
 import persistence.PersistenceManager;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,5 +117,29 @@ public class Task {
         });
 
         return tasks;
+    }
+
+    public static void saveAllNewTasks(int activityID, List<Task> tasks) {
+        String inset = "INSERT INTO catering.tasks (activity_id, kitchen_shift_id, cook_id, completed, estimated_time, estimated_doses) VALUES (?, ?, ?, ?, ?, ?)";
+        PersistenceManager.executeBatchUpdate(inset, tasks.size(), new BatchUpdateHandler() {
+            @Override
+            public void handleBatchItem(PreparedStatement ps, int batchCount) throws SQLException {
+                Task task = tasks.get(batchCount);
+                ps.setInt(1, activityID);
+                ps.setInt(2, task.shift.getID());
+                ps.setInt(3, task.cook.getID());
+                ps.setBoolean(4, task.completed);
+                ps.setInt(5, task.estimatedTime);
+                ps.setString(6, task.estimatedDoses);
+            }
+
+            @Override
+            public void handleGeneratedIds(ResultSet rs, int count) throws SQLException {
+                Task task = tasks.get(count);
+                task.id = rs.getInt(1);
+
+                cache.put(task.id, task);
+            }
+        });
     }
 }

@@ -152,5 +152,7 @@ public class Activity {
                 cache.put(activity.id, activity);
             }
         });
+
+        activities.forEach(activity -> Task.saveAllNewTasks(activity.id, activity.tasks));
     }
 }
