@@ -173,7 +173,7 @@ public class Activity {
         String delete = String.format("DELETE FROM catering.activities WHERE id = %d", activity.id);
         PersistenceManager.executeUpdate(delete);
 
-        activity.tasks.forEach(Task::deleteTask);
+        Task.deleteAllTasksInActivity(activity.id, activity.tasks);
 
         cache.remove(activity.id);
     }

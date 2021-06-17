@@ -162,6 +162,13 @@ public class Task {
         cache.remove(task.id);
     }
 
+    public static void deleteAllTasksInActivity(int activityID, List<Task> removedTasks) {
+        String delete = String.format("DELETE FROM catering.tasks WHERE activity_id = %d", activityID);
+        PersistenceManager.executeUpdate(delete);
+
+        removedTasks.forEach(task -> cache.remove(task.id));
+    }
+
     public static void updateActivity(int newActivityID, Task task) {
         String update = String.format("UPDATE catering.tasks SET activity_id = %d WHERE id = %d", newActivityID, task.id);
         PersistenceManager.executeUpdate(update);

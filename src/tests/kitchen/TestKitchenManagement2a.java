@@ -8,7 +8,12 @@ import businesslogic.kitchen.Activity;
 import businesslogic.kitchen.KitchenTaskException;
 import businesslogic.kitchen.SummarySheet;
 import businesslogic.recipe.Recipe;
+import businesslogic.shift.KitchenShift;
+import businesslogic.shift.KitchenShiftSchedule;
+import businesslogic.user.User;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class TestKitchenManagement2a {
     public static void main(String[] args) {
@@ -21,14 +26,21 @@ public class TestKitchenManagement2a {
             System.out.println("TEST REMOVE ACTIVITY");
             System.out.println("-".repeat(80));
 
-            // We open a summary sheet
+            // Open summary sheet
             Event event = CatERing.getInstance().getEventManager().getEvent(1);
             Service service = event.getService(2);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().openSummarySheet(event, service);
 
-            // We add an activity to the summary sheet
+            // Add activity
             ObservableList<Recipe> recipes = CatERing.getInstance().getRecipeManager().getRecipes();
             Activity activity = CatERing.getInstance().getKitchenTaskManager().addActivity(recipes.get(4), "10 Etti", "3 Etti");
+
+            // Add two tasks to activity
+            KitchenShiftSchedule kss = CatERing.getInstance().getShiftManager().getKitchenShiftSchedule();
+            List<KitchenShift> kitchenShifts = kss.getKitchenShifts();
+            User cook = User.loadUserById(4);
+            CatERing.getInstance().getKitchenTaskManager().createTask(activity, kitchenShifts.get(0), cook, 10, "1 etto");
+            CatERing.getInstance().getKitchenTaskManager().createTask(activity, kitchenShifts.get(1), cook, 30, "4 etti");
 
             // Print summary sheet
             System.out.println("-".repeat(80));
@@ -36,7 +48,7 @@ public class TestKitchenManagement2a {
             System.out.println("-".repeat(80));
             System.out.println(sh.debugString());
 
-            // We remove the added activity
+            // Remove Activity
             CatERing.getInstance().getKitchenTaskManager().removeActivity(activity);
 
             // Print summary sheet again
