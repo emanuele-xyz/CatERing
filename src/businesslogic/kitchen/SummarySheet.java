@@ -33,10 +33,6 @@ public class SummarySheet {
         return id;
     }
 
-    public int getActivitiesSize() {
-        return activities.size();
-    }
-
     public List<Activity> addActivity(KitchenProcedure kitchenProcedure, String toPrepare, String prepared) {
         List<Activity> res = new ArrayList<>();
 

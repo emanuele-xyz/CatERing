@@ -170,4 +170,12 @@ public class Activity {
 
         cache.put(activity.id, activity);
     }
+
+    // TODO: to be implemented
+    public static void deleteActivity(Activity activity) {
+        String delete = String.format("DELETE FROM catering.activities WHERE id = %d", activity.id);
+        PersistenceManager.executeUpdate(delete);
+
+        cache.remove(activity.id);
+    }
 }
