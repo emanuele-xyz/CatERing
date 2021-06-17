@@ -8,8 +8,7 @@ public class TestKitchenManagement5e {
     public static void main(String[] args) {
         try {
 
-            // ---------------------------------------------------------------------------------------------------------
-
+            // Login
             CatERing.getInstance().getUserManager().fakeLogin("Lidia");
 
             System.out.println("-".repeat(80));

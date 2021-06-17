@@ -11,8 +11,6 @@ public class TestKitchenManagement1a {
     public static void main(String[] args) {
         try {
 
-            // ---------------------------------------------------------------------------------------------------------
-
             // Login
             CatERing.getInstance().getUserManager().fakeLogin("Lidia");
 
