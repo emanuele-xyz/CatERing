@@ -42,7 +42,7 @@ public class TestKitchenManagement5f {
             KitchenShiftSchedule kss = CatERing.getInstance().getShiftManager().getKitchenShiftSchedule();
             List<KitchenShift> kitchenShifts = kss.getKitchenShifts();
             User cook = User.loadUserById(4);
-            Task task = CatERing.getInstance().getKitchenTaskManager().createTask(activity, kitchenShifts.get(0), cook, 10, "1 dose");
+            Task task = CatERing.getInstance().getKitchenTaskManager().createTask(activity, kitchenShifts.get(0), cook, 10, "1 etto");
 
             // Print activity before task delete
             System.out.println("-".repeat(80));

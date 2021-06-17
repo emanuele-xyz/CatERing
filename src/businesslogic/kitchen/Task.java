@@ -164,4 +164,10 @@ public class Task {
 
         cache.remove(task.id);
     }
+
+    // TODO: to be implemented
+    public static void updateActivity(int newActivityID, Task task) {
+        String update = String.format("UPDATE catering.tasks SET activity_id = %d WHERE id = %d", newActivityID, task.id);
+        PersistenceManager.executeUpdate(update);
+    }
 }
