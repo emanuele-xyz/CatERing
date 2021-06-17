@@ -54,10 +54,9 @@ public class KitchenTaskPersistence implements KitchenTaskEventReceiver {
         Task.updateActivity(newActivity.getID(), task);
     }
 
-    // TODO: to be implemented
     @Override
     public void updateTaskShiftModified(SummarySheet summarySheet, Activity activity, Task task) {
-        System.out.println("Modifying task shift for summary sheet ...");
+        Task.updateShift(task);
     }
 
     // TODO: to be implemented

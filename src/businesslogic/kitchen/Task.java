@@ -170,4 +170,10 @@ public class Task {
         String update = String.format("UPDATE catering.tasks SET activity_id = %d WHERE id = %d", newActivityID, task.id);
         PersistenceManager.executeUpdate(update);
     }
+
+    // TODO: to be implemented
+    public static void updateShift(Task task) {
+        String update = String.format("UPDATE catering.tasks SET kitchen_shift_id = %d WHERE id = %d", task.shift.getID(), task.id);
+        PersistenceManager.executeUpdate(update);
+    }
 }
