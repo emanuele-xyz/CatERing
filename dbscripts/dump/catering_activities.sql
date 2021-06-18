@@ -10,3 +10,9 @@ create table activities
     position               int                     not null
 );
 
+INSERT INTO catering.activities (id, summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (184, 31, 21, '', '', '', 1);
+INSERT INTO catering.activities (id, summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (185, 31, 22, '', '', '', 2);
+INSERT INTO catering.activities (id, summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (186, 31, 23, '', '', '', 3);
+INSERT INTO catering.activities (id, summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (187, 31, 24, '', '', '', 4);
+INSERT INTO catering.activities (id, summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (188, 31, 25, '', '', '', 5);
+INSERT INTO catering.activities (id, summary_sheet_id, kitchen_procedure_id, doses_to_prepare, already_prepared_doses, prepared_doses, position) VALUES (189, 31, 1, '12 porzioni', 'nessuna porzione', '', 0);

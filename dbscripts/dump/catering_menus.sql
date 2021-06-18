@@ -22,3 +22,4 @@ INSERT INTO catering.menus (id, title, owner_id, published) VALUES (97, 'Menu Pi
 INSERT INTO catering.menus (id, title, owner_id, published) VALUES (98, 'Menu Pinco Pallino', 2, 0);
 INSERT INTO catering.menus (id, title, owner_id, published) VALUES (99, 'Menu Pinco Pallino', 2, 0);
 INSERT INTO catering.menus (id, title, owner_id, published) VALUES (100, 'Menu Pinco Pallino', 2, 0);
+INSERT INTO catering.menus (id, title, owner_id, published) VALUES (101, 'Selezione di Crepes', 2, 1);

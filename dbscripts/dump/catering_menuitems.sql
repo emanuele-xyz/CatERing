@@ -103,3 +103,5 @@ INSERT INTO catering.menuitems (id, menu_id, section_id, description, recipe_id,
 INSERT INTO catering.menuitems (id, menu_id, section_id, description, recipe_id, position) VALUES (203, 100, 80, 'Alici marinate', 3, 1);
 INSERT INTO catering.menuitems (id, menu_id, section_id, description, recipe_id, position) VALUES (205, 100, 82, 'Salmone al forno', 8, 0);
 INSERT INTO catering.menuitems (id, menu_id, section_id, description, recipe_id, position) VALUES (206, 100, 0, 'Insalata di riso', 4, 0);
+INSERT INTO catering.menuitems (id, menu_id, section_id, description, recipe_id, position) VALUES (208, 101, 0, 'Crepes con crema di cioccolato', 21, 0);
+INSERT INTO catering.menuitems (id, menu_id, section_id, description, recipe_id, position) VALUES (209, 101, 0, 'Crepes con miele', 25, 1);

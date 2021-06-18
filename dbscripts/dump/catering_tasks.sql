@@ -10,3 +10,4 @@ create table tasks
     estimated_doses  varchar(128) default '' not null
 );
 
+INSERT INTO catering.tasks (id, activity_id, kitchen_shift_id, cook_id, completed, estimated_time, estimated_doses) VALUES (51, 189, 1, 4, 0, 60, '3 porzioni');
