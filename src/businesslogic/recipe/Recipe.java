@@ -33,6 +33,7 @@ public class Recipe extends KitchenProcedure {
         return id;
     }
 
+    @Override
     public String toString() {
         return name;
     }
@@ -92,11 +93,15 @@ public class Recipe extends KitchenProcedure {
             final int requiredPreparationID = rs.getInt(1);
             if (requiredPreparationID <= 0) return;
 
+            // Load and add preparation
             Preparation preparation = preparationsCache.get(requiredPreparationID);
             if (preparation == null) {
                 preparation = Preparation.loadPreparationByID(requiredPreparationID);
             }
             requiredKitchenProcedures.add(preparation);
+
+            // Load and add all preparations required by the previously loaded preparation
+            requiredKitchenProcedures.addAll(Preparation.loadRequiredKitchenProcedures(preparation));
         });
 
         return requiredKitchenProcedures;

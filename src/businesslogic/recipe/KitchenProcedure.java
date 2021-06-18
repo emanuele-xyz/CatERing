@@ -1,10 +1,7 @@
 package businesslogic.recipe;
 
 import persistence.PersistenceManager;
-import persistence.ResultHandler;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +16,7 @@ public abstract class KitchenProcedure {
     public Stream<KitchenProcedure> getRequiredKitchenProceduresStream() {
         List<KitchenProcedure> rkps = new ArrayList<>();
         rkps.add(this);
-        rkps.addAll(loadRequiredKitchenProcedure(this));
+        rkps.addAll(loadRequiredKitchenProcedures(this));
         return rkps.stream().distinct();
     }
 
@@ -46,7 +43,7 @@ public abstract class KitchenProcedure {
         else return preparationsCache.getOrDefault(id, null);
     }
 
-    public static List<KitchenProcedure> loadRequiredKitchenProcedure(KitchenProcedure kitchenProcedure) {
+    public static List<KitchenProcedure> loadRequiredKitchenProcedures(KitchenProcedure kitchenProcedure) {
         if (kitchenProcedure instanceof Recipe recipe) {
             return Recipe.loadRequiredKitchenProcedures(recipe);
         } else if (kitchenProcedure instanceof Preparation preparation) {

@@ -34,8 +34,8 @@ public class TestKitchenManagement {
             System.out.println("TEST CREATE SUMMARY SHEET");
             System.out.println("-".repeat(80));
 
-            Event e = CatERing.getInstance().getEventManager().getEvent(1);
-            Service s = e.getService(2);
+            Event e = CatERing.getInstance().getEventManager().getEvent(4);
+            Service s = e.getService(9);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().generateSummarySheet(e, s);
             System.out.println(e.debugString());
 
