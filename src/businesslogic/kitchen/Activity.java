@@ -115,8 +115,7 @@ public class Activity {
             } else {
                 Activity activity = new Activity();
                 activity.id = activityID;
-                // TODO: to be reworked when preparations are also present
-                activity.kitchenProcedure = Recipe.loadRecipeById(rs.getInt("kitchen_procedure_id"));
+                activity.kitchenProcedure = KitchenProcedure.loadKitchenProcedureByID(rs.getInt("kitchen_procedure_id"));
                 activity.tasks = Task.loadTasksByActivityID(activity.id);
                 activity.dosesToPrepare = rs.getString("doses_to_prepare");
                 activity.alreadyPreparedDoses = rs.getString("already_prepared_doses");
