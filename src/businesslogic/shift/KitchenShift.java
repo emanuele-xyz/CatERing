@@ -25,6 +25,18 @@ public class KitchenShift {
 
     // TODO: this should be implemented in Shift Management use case
     public boolean isInThePast() {
+
+        // TODO: add this
+        /*
+        Time dbTime = // the time you obtained from the db
+        long dbLong = dbTime.getTime();
+        long now = System.currentTimeMillis();
+
+        if (dbLong < now) // data in the db is in the past
+        if (dbLong > now) // data in the db is in the future
+        if (dbLong == now) // data in the db is exactly now
+         */
+
         return false;
     }
 
