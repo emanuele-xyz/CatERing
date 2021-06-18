@@ -7,6 +7,7 @@ import persistence.ResultHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -88,6 +89,12 @@ public class User {
             });
         }
         return load;
+    }
+
+    // TODO: to be implemented
+    // TODO: this should load users by IDs in batch
+    public static List<User> loadUsersByIDs(List<Integer> userIDs) {
+        return null;
     }
 
     public static User loadUser(String username) {

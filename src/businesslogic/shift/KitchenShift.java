@@ -3,17 +3,24 @@ package businesslogic.shift;
 import businesslogic.user.User;
 import persistence.PersistenceManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 public class KitchenShift {
 
     private int id;
     private boolean isFull;
+    private Date date;
+    private Time start;
+    private Time end;
+    private final Set<User> availableCooks;
 
-    private KitchenShift() {}
+    private KitchenShift() {
+        availableCooks = new HashSet<>();
+    }
 
     public int getID() {
         return id;
@@ -26,8 +33,24 @@ public class KitchenShift {
     // TODO: this should be implemented in Shift Management use case
     public boolean isInThePast() {
 
-        // TODO: add this
+        // If date < current date -> yes
+        // else if date == current date -> check time
+        // else -> no
+
+        // check time
+        // current time > end time -> yes
+        // else -> no
+
+//        Instant a = date.toInstant().truncatedTo(ChronoUnit.DAYS);
+//        Date now = new Date(System.currentTimeMillis());
+//        Instant b = now.toInstant().truncatedTo(ChronoUnit.DAYS);
+//        a.equals(b);
+
         /*
+        if(jdatechooser1.getDate().getTime() > System.currentTimeMillis()){
+          System.out.println("ok");
+        }
+
         Time dbTime = // the time you obtained from the db
         long dbLong = dbTime.getTime();
         long now = System.currentTimeMillis();
@@ -46,7 +69,7 @@ public class KitchenShift {
 
     // TODO: this should be implemented in Shift Management use case
     public boolean hasCookAvailable(User cook) {
-        return true;
+        return availableCooks.contains(cook);
     }
 
     public String debugString() {
@@ -78,6 +101,12 @@ public class KitchenShift {
             KitchenShift kitchenShift = new KitchenShift();
             kitchenShift.id = id;
             kitchenShift.isFull = rs.getBoolean("is_full");
+            // TODO: add date, start time and finish time
+            kitchenShift.date = rs.getDate("date");
+            kitchenShift.start = rs.getTime("time_start");
+            kitchenShift.end = rs.getTime("time_end");
+            // TODO: add cooks to availableCooks
+            kitchenShift.availableCooks.addAll(KitchenShift.loadAvailableCooks(kitchenShift.id));
 
             cache.put(kitchenShift.id, kitchenShift);
         });
@@ -97,6 +126,12 @@ public class KitchenShift {
                 KitchenShift kitchenShift = new KitchenShift();
                 kitchenShift.id = id;
                 kitchenShift.isFull = rs.getBoolean("is_full");
+                // TODO: add date, start time and finish time
+                kitchenShift.date = rs.getDate("date");
+                kitchenShift.start = rs.getTime("time_start");
+                kitchenShift.end = rs.getTime("time_end");
+                // TODO: add cooks to availableCooks
+                kitchenShift.availableCooks.addAll(KitchenShift.loadAvailableCooks(kitchenShift.id));
 
                 cache.put(kitchenShift.id, kitchenShift);
                 kitchenShifts.add(kitchenShift);
@@ -104,6 +139,12 @@ public class KitchenShift {
         });
 
         return kitchenShifts;
+    }
+
+    // TODO: to be implemented
+    private static List<User> loadAvailableCooks(int kitchenShiftID) {
+        List<Integer> userIDs = new ArrayList<>();
+        return User.loadUsersByIDs(userIDs);
     }
 
     public static void updateMarkAsFull(KitchenShift kitchenShift) {
