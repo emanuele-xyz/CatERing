@@ -28,8 +28,8 @@ public class TestKitchenManagement5e {
             System.out.println("-".repeat(80));
 
             // Open summary sheet
-            Event event = CatERing.getInstance().getEventManager().getEvent(1);
-            Service service = event.getService(2);
+            Event event = CatERing.getInstance().getEventManager().getEvent(4);
+            Service service = event.getService(9);
             SummarySheet sh = CatERing.getInstance().getKitchenTaskManager().openSummarySheet(event, service);
 
             // Add activity
