@@ -5,4 +5,4 @@ create table summary_sheets
     service_id int not null
 );
 
-INSERT INTO catering.summary_sheets (id, service_id) VALUES (31, 9);
+INSERT INTO catering.summary_sheets (id, service_id) VALUES (32, 9);
