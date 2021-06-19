@@ -8,6 +8,7 @@ import java.sql.Time;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class KitchenShift {
 
@@ -152,7 +153,7 @@ public class KitchenShift {
             userIDs.add(cookID);
         });
 
-        return User.loadUsersByIDs(userIDs);
+        return userIDs.stream().map(User::loadUserById).collect(Collectors.toList());
     }
 
     public static void updateMarkAsFull(KitchenShift kitchenShift) {
