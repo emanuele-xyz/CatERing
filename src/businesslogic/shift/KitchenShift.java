@@ -140,9 +140,18 @@ public class KitchenShift {
         return kitchenShifts;
     }
 
-    // TODO: to be implemented
     private static List<User> loadAvailableCooks(int kitchenShiftID) {
         List<Integer> userIDs = new ArrayList<>();
+
+        // Populate userIDs
+        String query = String.format("SELECT cook_id FROM catering.kitchen_shift_availabilities WHERE kitchen_shift_id = %d", kitchenShiftID);
+        PersistenceManager.executeQuery(query, rs -> {
+            final int cookID = rs.getInt("cook_id");
+            if (cookID <= 0) return;
+
+            userIDs.add(cookID);
+        });
+
         return User.loadUsersByIDs(userIDs);
     }
 
