@@ -67,7 +67,6 @@ public class KitchenShift {
         this.isFull = true;
     }
 
-    // TODO: this should be implemented in Shift Management use case
     public boolean hasCookAvailable(User cook) {
         return availableCooks.contains(cook);
     }
