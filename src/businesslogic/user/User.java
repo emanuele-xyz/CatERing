@@ -37,6 +37,18 @@ public class User {
         return this.id;
     }
 
+    public String debugString(int indentation, int spacesPerIndent) {
+        final String outerIndent = " ".repeat(indentation * spacesPerIndent);
+        final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(outerIndent).append("Utente '").append(username).append("'");
+        roles.forEach(role -> sb.append(' ').append(role.toString()));
+
+        return sb.toString();
+    }
+
+    @Override
     public String toString() {
         String result = username;
         if (roles.size() > 0) {

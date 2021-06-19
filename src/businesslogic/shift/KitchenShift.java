@@ -73,15 +73,24 @@ public class KitchenShift {
         return debugString(0, 2);
     }
 
-    // TODO: add better debug string
     public String debugString(int indentation, int spacesPerIndent) {
         final String outerIndent = " ".repeat(indentation * spacesPerIndent);
         final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
 
-        return outerIndent + "Turno di cucina {\n" +
-                indent + "id: " + id + '\n' +
-                indent + "al completo: " + isFull + '\n' +
-                outerIndent + "}";
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(outerIndent).append("Turno di cucina {\n");
+        sb.append(indent).append("id: ").append(id).append('\n');
+        sb.append(indent).append("al completo: ").append(isFull).append('\n');
+        sb.append(indent).append("data: ").append(date).append('\n');
+        sb.append(indent).append("ora inizio: ").append(start).append('\n');
+        sb.append(indent).append("ora fine: ").append(end).append('\n');
+        sb.append(indent).append("Cuochi disponibili {\n");
+        availableCooks.forEach(cook -> sb.append(cook.debugString(indentation + 2, spacesPerIndent)).append(",\n"));
+        sb.append(indent).append("}\n");
+        sb.append(outerIndent).append('}');
+
+        return sb.toString();
     }
 
     // STATIC METHODS FOR PERSISTENCE
