@@ -31,9 +31,7 @@ public class KitchenShift {
         return isFull;
     }
 
-    // TODO: this should be implemented in Shift Management use case
     public boolean isInThePast() {
-
         // If date < current date -> yes
         // else if date == current date -> check time
         // else -> no
@@ -42,26 +40,28 @@ public class KitchenShift {
         // current time > end time -> yes
         // else -> no
 
-//        Instant a = date.toInstant().truncatedTo(ChronoUnit.DAYS);
-//        Date now = new Date(System.currentTimeMillis());
-//        Instant b = now.toInstant().truncatedTo(ChronoUnit.DAYS);
-//        a.equals(b);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        java.util.Date currentDate = calendar.getTime();
 
-        /*
-        if(jdatechooser1.getDate().getTime() > System.currentTimeMillis()){
-          System.out.println("ok");
+        if (date.before(currentDate)) {
+            return true;
+        } else if (date.equals(currentDate)) {
+            // Check time
+            java.util.Date date = new java.util.Date();
+            calendar.clear();
+            calendar.set(Calendar.HOUR_OF_DAY, date.getHours());
+            calendar.set(Calendar.MINUTE, date.getMinutes());
+            java.util.Date currentTime = calendar.getTime();
+
+            return currentTime.after(end);
+
+        } else {
+            return false;
         }
-
-        Time dbTime = // the time you obtained from the db
-        long dbLong = dbTime.getTime();
-        long now = System.currentTimeMillis();
-
-        if (dbLong < now) // data in the db is in the past
-        if (dbLong > now) // data in the db is in the future
-        if (dbLong == now) // data in the db is exactly now
-         */
-
-        return false;
     }
 
     public void markAsFull() {
@@ -101,11 +101,9 @@ public class KitchenShift {
             KitchenShift kitchenShift = new KitchenShift();
             kitchenShift.id = id;
             kitchenShift.isFull = rs.getBoolean("is_full");
-            // TODO: add date, start time and finish time
             kitchenShift.date = rs.getDate("date");
             kitchenShift.start = rs.getTime("time_start");
             kitchenShift.end = rs.getTime("time_end");
-            // TODO: add cooks to availableCooks
             kitchenShift.availableCooks.addAll(KitchenShift.loadAvailableCooks(kitchenShift.id));
 
             cache.put(kitchenShift.id, kitchenShift);
@@ -126,11 +124,9 @@ public class KitchenShift {
                 KitchenShift kitchenShift = new KitchenShift();
                 kitchenShift.id = id;
                 kitchenShift.isFull = rs.getBoolean("is_full");
-                // TODO: add date, start time and finish time
                 kitchenShift.date = rs.getDate("date");
                 kitchenShift.start = rs.getTime("time_start");
                 kitchenShift.end = rs.getTime("time_end");
-                // TODO: add cooks to availableCooks
                 kitchenShift.availableCooks.addAll(KitchenShift.loadAvailableCooks(kitchenShift.id));
 
                 cache.put(kitchenShift.id, kitchenShift);
