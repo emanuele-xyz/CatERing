@@ -49,10 +49,9 @@ public class KitchenShift {
             return true;
         } else if (date.equals(currentDate)) {
             // Check time
-            java.util.Date date = new java.util.Date();
-            calendar.clear();
-            calendar.set(Calendar.HOUR_OF_DAY, date.getHours());
-            calendar.set(Calendar.MINUTE, date.getMinutes());
+            Calendar tmp = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, tmp.get(Calendar.HOUR_OF_DAY));
+            calendar.set(Calendar.MINUTE, tmp.get(Calendar.MINUTE));
             java.util.Date currentTime = calendar.getTime();
 
             return currentTime.after(end);
