@@ -73,6 +73,7 @@ public class KitchenShift {
         return debugString(0, 2);
     }
 
+    // TODO: add better debug string
     public String debugString(int indentation, int spacesPerIndent) {
         final String outerIndent = " ".repeat(indentation * spacesPerIndent);
         final String indent = " ".repeat((indentation + 1) * spacesPerIndent);
