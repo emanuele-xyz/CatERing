@@ -1,7 +1,5 @@
 package businesslogic.shift;
 
-import persistence.ShiftPersistence;
-
 import java.util.ArrayList;
 import java.util.List;
 

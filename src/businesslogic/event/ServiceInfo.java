@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 
 public class ServiceInfo implements EventItemInfo {
+
     private int id;
     private String name;
     private Date date;
@@ -21,7 +22,6 @@ public class ServiceInfo implements EventItemInfo {
     public ServiceInfo(String name) {
         this.name = name;
     }
-
 
     public String toString() {
         return name + ": " + date + " (" + timeStart + "-" + timeEnd + "), " + participants + " pp.";

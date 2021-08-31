@@ -34,6 +34,7 @@ public class Event {
     public Service getService(int id) {
         return services.stream().filter(service -> service.getId() == id).findAny().orElse(null);
     }
+
     public String debugString() {
         return debugString(0, 2);
     }

@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EventInfo implements EventItemInfo {
+
     private int id;
     private String name;
     private Date dateStart;
