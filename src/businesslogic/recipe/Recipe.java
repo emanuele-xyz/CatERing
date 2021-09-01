@@ -7,10 +7,8 @@ import persistence.ResultHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 public class Recipe extends KitchenProcedure {
 
@@ -83,27 +81,5 @@ public class Recipe extends KitchenProcedure {
             }
         });
         return rec;
-    }
-
-    public static List<KitchenProcedure> loadRequiredKitchenProcedures(Recipe recipe) {
-        List<KitchenProcedure> requiredKitchenProcedures = new ArrayList<>();
-
-        String query = String.format("SELECT required_preparation_id FROM catering.kitchen_procedures_requirements WHERE kitchen_procedure_id = %d", recipe.id);
-        PersistenceManager.executeQuery(query, rs -> {
-            final int requiredPreparationID = rs.getInt(1);
-            if (requiredPreparationID <= 0) return;
-
-            // Load and add preparation
-            Preparation preparation = preparationsCache.get(requiredPreparationID);
-            if (preparation == null) {
-                preparation = Preparation.loadPreparationByID(requiredPreparationID);
-            }
-            requiredKitchenProcedures.add(preparation);
-
-            // Load and add all preparations required by the previously loaded preparation
-            requiredKitchenProcedures.addAll(Preparation.loadRequiredKitchenProcedures(preparation));
-        });
-
-        return requiredKitchenProcedures;
     }
 }
